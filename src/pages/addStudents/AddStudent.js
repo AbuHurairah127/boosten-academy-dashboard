@@ -1,68 +1,114 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import useAddStudents from "./useAddStudents";
 const AddStudent = () => {
+  const { handleChange } = useAddStudents();
   return (
     <div className="mx-5 mt-5">
       <Link className="btn btn-primary" to="/">
         Back to Home
       </Link>
       <h1 className="text-center">Add Students</h1>
-      <form className="row g-3">
+      <form className="row g-3" onSubmit={onSubmitHandler}>
         <div className="col-md-6">
           <label htmlFor="inputEmail4" className="form-label">
             Email
           </label>
-          <input type="email" className="form-control" id="inputEmail4" />
+          <input
+            type="email"
+            className="form-control"
+            id="inputEmail4"
+            name="email"
+            placeholder="Email"
+            onChange={(e) => handleChange(e)}
+          />
         </div>
         <div className="col-md-6">
           <label htmlFor="inputPassword4" className="form-label">
             Password
           </label>
-          <input type="password" className="form-control" id="inputPassword4" />
+          <input
+            type="password"
+            className="form-control"
+            id="inputPassword4"
+            name="password"
+            placeholder="Password"
+            onChange={(e) => handleChange(e)}
+          />
         </div>
         <div className="col-12">
           <label htmlFor="inputAddress" className="form-label">
-            Address
+            Residential Address
           </label>
           <input
             type="text"
             className="form-control"
             id="inputAddress"
-            placeholder="1234 Main St"
+            placeholder="Residential Address"
+            name="address"
+            onChange={(e) => handleChange(e)}
           />
         </div>
         <div className="col-12">
           <label htmlFor="inputAddress2" className="form-label">
-            Address 2
+            Postal Address
           </label>
           <input
             type="text"
             className="form-control"
             id="inputAddress2"
-            placeholder="Apartment, studio, or floor"
+            placeholder="Postal Address"
+            name="address2"
+            onChange={(e) => handleChange(e)}
           />
         </div>
-        <div className="col-md-6">
+        <div className="col-md-7">
           <label htmlFor="inputCity" className="form-label">
             City
           </label>
-          <input type="text" className="form-control" id="inputCity" />
+          <input
+            type="text"
+            className="form-control"
+            id="inputCity"
+            name="city"
+            placeholder="City"
+            onChange={(e) => handleChange(e)}
+          />
+        </div>
+        <div className="col-md-5">
+          <label htmlFor="inputState" className="form-label">
+            Gender
+          </label>
+          <select
+            id="inputState"
+            className="form-select"
+            name="gender"
+            onChange={(e) => handleChange(e)}
+          >
+            <option disabled>Choose Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="prefer not to say">Prefer not to say</option>
+          </select>
         </div>
         <div className="col-md-4">
           <label htmlFor="inputState" className="form-label">
-            State
+            Class
           </label>
-          <select id="inputState" className="form-select">
-            <option selected="">Choose...</option>
-            <option>...</option>
+          <select
+            id="inputState"
+            className="form-select"
+            name="Class"
+            onChange={(e) => handleChange(e)}
+          >
+            <option disabled>Choose Class</option>
+            <option value="9th">9th</option>
+            <option value="10th">10th</option>
+            <option value="1st-year">11th</option>
+            <option value="2nd-year">12th</option>
           </select>
         </div>
-        <div className="col-md-2">
-          <label htmlFor="inputZip" className="form-label">
-            Zip
-          </label>
-          <input type="text" className="form-control" id="inputZip" />
-        </div>
+
         <div className="col-12">
           <div className="form-check">
             <input
@@ -77,7 +123,7 @@ const AddStudent = () => {
         </div>
         <div className="col-12">
           <button type="submit" className="btn btn-primary">
-            Sign in
+            Register
           </button>
         </div>
       </form>
