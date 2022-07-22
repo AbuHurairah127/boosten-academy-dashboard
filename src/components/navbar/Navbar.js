@@ -7,7 +7,7 @@ const Navbar = () => {
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container-fluid">
           <a className="navbar-brand" href="#">
-            Navbar
+            Boosten Academy
           </a>
           <button
             className="navbar-toggler"
@@ -20,68 +20,100 @@ const Navbar = () => {
           >
             <span className="navbar-toggler-icon" />
           </button>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <a className="nav-link" aria-current="page" href="#">
-                  Home
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Contacts
-                </a>
-              </li>
-              <li className="nav-item dropdown">
-                <a
-                  className="nav-link dropdown-toggle"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Add
-                </a>
-                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li>
-                    <Link className="dropdown-item" to="/add-students">
-                      Add Students
-                    </Link>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Add Marks
-                    </a>
-                  </li>
-                  <li>
-                    <hr className="dropdown-divider" />
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Something else here
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#" tabIndex={-1}>
-                  Logout
-                </a>
-              </li>
-            </ul>
-            <form className="d-flex">
-              <input
-                className="form-control me-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <button className="btn btn-outline-light" type="submit">
-                Search
-              </button>
-            </form>
-          </div>
+          <div
+            className="collapse navbar-collapse"
+            id="navbarSupportedContent"
+          ></div>
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <li className="nav-item">
+              <a className="nav-link" aria-current="page" href="#">
+                Home
+              </a>
+            </li>
+            <li className="nav-item dropdown">
+              <a
+                className="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Classes
+              </a>
+              <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li>
+                  <button
+                    className="dropdown-item"
+                    onClick={() => console.log("9th Class")}
+                  >
+                    9th
+                  </button>
+                </li>
+                <li>
+                  <button
+                    className="dropdown-item"
+                    onClick={() => console.log("10th Class")}
+                  >
+                    10th
+                  </button>
+                </li>
+                <li>
+                  <hr className="dropdown-divider" />
+                </li>
+                <li>
+                  <button
+                    className="dropdown-item"
+                    onClick={() => console.log("1st year")}
+                  >
+                    1st-year
+                  </button>
+                </li>
+                <li>
+                  <button
+                    className="dropdown-item"
+                    onClick={() => console.log("2nd year")}
+                  >
+                    2nd-year
+                  </button>
+                </li>
+              </ul>
+            </li>
+            <li className="nav-item dropdown">
+              <a
+                className="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Add
+              </a>
+              <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li>
+                  <Link className="dropdown-item" to="/add-students">
+                    Add Students
+                  </Link>
+                </li>
+                <li>
+                  <a className="dropdown-item" href="#">
+                    Add Marks
+                  </a>
+                </li>
+                <li>
+                  <hr className="dropdown-divider" />
+                </li>
+                <li>
+                  <a className="dropdown-item" href="#">
+                    Something else here
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li className="nav-item"></li>
+          </ul>
+          <button className="btn btn-outline-light mx-4">Logout</button>
         </div>
       </nav>
     </div>
