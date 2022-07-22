@@ -9,7 +9,7 @@ const AddStudent = () => {
         Back to Home
       </Link>
       <h1 className="text-center">Add Students</h1>
-      <form className="row g-3" onSubmit={onSubmitHandler}>
+      <form className="row g-3">
         <div className="col-md-6">
           <label htmlFor="inputEmail4" className="form-label">
             Email
@@ -36,7 +36,7 @@ const AddStudent = () => {
             onChange={(e) => handleChange(e)}
           />
         </div>
-        <div className="col-12">
+        {/* <div className="col-12">
           <label htmlFor="inputAddress" className="form-label">
             Residential Address
           </label>
@@ -74,7 +74,7 @@ const AddStudent = () => {
             placeholder="City"
             onChange={(e) => handleChange(e)}
           />
-        </div>
+        </div> */}
         <div className="col-md-5">
           <label htmlFor="inputState" className="form-label">
             Gender
@@ -109,18 +109,6 @@ const AddStudent = () => {
           </select>
         </div>
 
-        <div className="col-12">
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              id="gridCheck"
-            />
-            <label className="form-check-label" htmlFor="gridCheck">
-              Check me out
-            </label>
-          </div>
-        </div>
         <div className="col-12">
           <button type="submit" className="btn btn-primary">
             Register
