@@ -26,11 +26,16 @@ const Navbar = () => {
           ></div>
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a className="nav-link" aria-current="page" href="#">
+              <Link className="nav-link" to="/">
                 Home
-              </a>
+              </Link>
             </li>
-            <li className="nav-item dropdown">
+            <li className="nav-item">
+              <Link className="nav-link" to="/students">
+                Students
+              </Link>
+            </li>
+            {/* <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle"
                 href="#"
@@ -78,7 +83,7 @@ const Navbar = () => {
                   </button>
                 </li>
               </ul>
-            </li>
+            </li> */}
             <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle"

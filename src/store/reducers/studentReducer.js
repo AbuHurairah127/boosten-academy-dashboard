@@ -11,18 +11,21 @@ let initialState = {
       fatherName: "Muhammad Shafique",
       rollNo: "8109",
       fee: "Paid",
+      class: "9th",
     },
     {
       name: "Hassan Saeed",
       fatherName: "Muhammad Saeed",
       rollNo: "8081",
       fee: "Paid",
+      class: "10th",
     },
     {
       name: "Bassam Tanvir",
       fatherName: "Muhammad Tanvir",
       rollNo: "8091",
       fee: "Not paid",
+      class: "1st year",
     },
   ],
 };
