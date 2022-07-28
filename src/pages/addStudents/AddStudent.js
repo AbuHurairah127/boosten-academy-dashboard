@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import useAddStudents from "./useAddStudents";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 const AddStudent = () => {
-  const { handleChange } = useAddStudents();
+  const { formik } = useAddStudents();
+  console.log(typeof formik.values.subjects);
   return (
     <div className="container">
       <div className="mx-5 mt-5">
@@ -25,7 +26,8 @@ const AddStudent = () => {
               name="name"
               placeholder="Name"
               pattern="[a-zA-Z\s]+"
-              onChange={(e) => handleChange(e)}
+              value={formik.values.name}
+              onChange={formik.handleChange}
               required
               title="Student's Name (Only Alphabet's are allowed)"
             />
@@ -41,7 +43,7 @@ const AddStudent = () => {
               name="FName"
               placeholder="Father's Name"
               pattern="[a-zA-Z\s]+"
-              onChange={(e) => handleChange(e)}
+              onChange={formik.handleChange}
               title="Father's Name"
               required
             />
@@ -57,7 +59,7 @@ const AddStudent = () => {
               name="rollNo"
               placeholder="Roll No."
               pattern="[0-9]{5}"
-              onChange={(e) => handleChange(e)}
+              onChange={formik.handleChange}
               title="Roll No. Pattern: '22000'"
               required
             />
@@ -71,7 +73,7 @@ const AddStudent = () => {
               className="form-control"
               id="inputDOB"
               name="DOB"
-              onChange={(e) => handleChange(e)}
+              onChange={formik.handleChange}
               title="Student's Date of Birth"
               required
             />
@@ -86,7 +88,7 @@ const AddStudent = () => {
               id="inputSNum"
               name="SNum"
               placeholder="Student's Phone #"
-              onChange={(e) => handleChange(e)}
+              onChange={formik.handleChange}
               min="923000000000"
               max="923500000000"
               pattern="[0-9]{12}"
@@ -104,7 +106,7 @@ const AddStudent = () => {
               id="inputFNum"
               name="FNum"
               placeholder="Father's Phone #"
-              onChange={(e) => handleChange(e)}
+              onChange={formik.handleChange}
               min="923000000000"
               max="923500000000"
               title="Father's Phone (Phone number Pattern :'923336584571')"
@@ -122,7 +124,7 @@ const AddStudent = () => {
               id="inputAddress"
               placeholder="Present Address"
               name="address"
-              onChange={(e) => handleChange(e)}
+              onChange={formik.handleChange}
               title="Student's Address"
               required
             />
@@ -137,7 +139,7 @@ const AddStudent = () => {
               id="inputCity"
               name="city"
               placeholder="City"
-              onChange={(e) => handleChange(e)}
+              onChange={formik.handleChange}
               title="Students City"
               required
             />
@@ -150,7 +152,7 @@ const AddStudent = () => {
               id="gender"
               className="form-select"
               name="gender"
-              onChange={(e) => handleChange(e)}
+              onChange={formik.handleChange}
               title="Student's Gender(Select the student's gender from the list)"
               required
             >
@@ -168,7 +170,7 @@ const AddStudent = () => {
               id="class"
               className="form-select"
               name="class"
-              onChange={(e) => handleChange(e)}
+              onChange={formik.handleChange}
               title="Student's Class(Select the student's class from the list)"
               required
             >
@@ -187,18 +189,161 @@ const AddStudent = () => {
               id="inputState"
               className="form-select"
               name="subjects"
-              onChange={(e) => handleChange(e)}
+              onChange={formik.handleChange}
               title="Student's Class(Select the student's class from the list)"
               required
             >
               <option value="">Choose Subjects</option>
-
-              <option value="9th">Biology Group</option>
-              <option value="10th">Computer Group</option>
-              <option value="1st-year">FSc(Pre-Medical)</option>
-              <option value="1s-year">FSc(Pre-Engineering)</option>
-              <option value="1-year">ICS</option>
-              <option value="2nd-year">I.Com</option>
+              {/* Subjects for 9th Class */}
+              {formik.values.class === "9th" && (
+                <>
+                  <option
+                    value={[
+                      "English",
+                      "Urdu",
+                      "Maths",
+                      "IS",
+                      "PS",
+                      "Physics",
+                      "Chemistry",
+                      "Biology",
+                    ]}
+                  >
+                    Biology Group
+                  </option>
+                  <option
+                    value={[
+                      "English",
+                      "Urdu",
+                      "Maths",
+                      "IS",
+                      "PS",
+                      "Physics",
+                      "Chemistry",
+                      "Computer",
+                    ]}
+                  >
+                    Computer Group
+                  </option>
+                </>
+              )}
+              {/* Subjects for 10th Class */}
+              {formik.values.class === "10th" && (
+                <>
+                  <option
+                    value={[
+                      "English",
+                      "Urdu",
+                      "Maths",
+                      "IS",
+                      "PS",
+                      "Physics",
+                      "Chemistry",
+                      "Biology",
+                    ]}
+                  >
+                    Biology Group
+                  </option>
+                  <option
+                    value={[
+                      "English",
+                      "Urdu",
+                      "Maths",
+                      "IS",
+                      "PS",
+                      "Physics",
+                      "Chemistry",
+                      "Computer",
+                    ]}
+                  >
+                    Computer Group
+                  </option>
+                </>
+              )}
+              {/* Subjects for 1st Year */}
+              {formik.values.class === "1st-year" && (
+                <>
+                  <option
+                    value={[
+                      "English",
+                      "Urdu",
+                      "Physics",
+                      "Chemistry",
+                      "IS",
+                      "Biology",
+                    ]}
+                  >
+                    FSc(Pre-Medical)
+                  </option>
+                  <option
+                    value={[
+                      "English",
+                      "Urdu",
+                      "Physics",
+                      "Chemistry",
+                      "IS",
+                      "Maths",
+                    ]}
+                  >
+                    FSc(Pre-Engineering)
+                  </option>
+                  <option
+                    value={[
+                      "English",
+                      "Urdu",
+                      "Physics",
+                      "Computer",
+                      "IS",
+                      "Maths",
+                    ]}
+                  >
+                    ICS
+                  </option>
+                  <option value="I.com">I.Com</option>
+                </>
+              )}
+              {/* Subjects for 2nd Year */}
+              {formik.values.class === "2nd-year" && (
+                <>
+                  <option
+                    value={[
+                      "English",
+                      "Urdu",
+                      "Physics",
+                      "Chemistry",
+                      "PS",
+                      "Biology",
+                    ]}
+                  >
+                    FSc(Pre-Medical)
+                  </option>
+                  <option
+                    value={[
+                      "English",
+                      "Urdu",
+                      "Physics",
+                      "Chemistry",
+                      "PS",
+                      "Maths",
+                    ]}
+                  >
+                    FSc(Pre-Engineering)
+                  </option>
+                  <option
+                    value={[
+                      "English",
+                      "Urdu",
+                      "Physics",
+                      "Computer",
+                      "PS",
+                      "Maths",
+                    ]}
+                  >
+                    ICS
+                  </option>
+                  <option value="I.com">I.Com</option>
+                </>
+              )}
             </select>
           </div>
 
