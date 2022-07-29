@@ -1,9 +1,7 @@
 import React from "react";
 import Footer from "./../../components/footer/Footer";
 import Navbar from "./../../components/navbar/Navbar";
-import { useSelector } from "react-redux";
 const Home = () => {
-  const students = useSelector((store) => store.studentReducer.students);
   return (
     <div className="d-flex flex-column homeContainer">
       <Navbar />

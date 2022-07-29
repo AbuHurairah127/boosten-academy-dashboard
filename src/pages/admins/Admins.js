@@ -54,7 +54,7 @@ const Admins = () => {
             <tbody>
               {students.map((item, index) => {
                 return (
-                  <tr scope="row">
+                  <tr>
                     <td className="text-center">{index + 1}</td>
                     <td className="text-center">{item.name}</td>
                     <td className="text-center">{item.fatherName}</td>

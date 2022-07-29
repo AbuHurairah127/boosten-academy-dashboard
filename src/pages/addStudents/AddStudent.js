@@ -4,7 +4,7 @@ import useAddStudents from "./useAddStudents";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 const AddStudent = () => {
   const { formik } = useAddStudents();
-  console.log(typeof formik.values.subjects);
+
   return (
     <div className="container">
       <div className="mx-5 mt-5">
@@ -14,7 +14,11 @@ const AddStudent = () => {
           </Link>
         </div>
         <h1 className="text-center">Add Students</h1>
-        <form className="row g-3">
+        <form
+          className="row g-3"
+          onSubmit={formik.handleSubmit}
+          onReset={formik.handleReset}
+        >
           <div className="col-md-5">
             <label htmlFor="inputName" className="form-label">
               Name
@@ -31,6 +35,11 @@ const AddStudent = () => {
               required
               title="Student's Name (Only Alphabet's are allowed)"
             />
+            {formik.errors.name && (
+              <div className="text-center fw-bold text-danger">
+                {formik.errors.name}
+              </div>
+            )}
           </div>
           <div className="col-md-5">
             <label htmlFor="inputFName" className="form-label">
@@ -47,6 +56,11 @@ const AddStudent = () => {
               title="Father's Name"
               required
             />
+            {formik.errors.FName && (
+              <div className="text-center fw-bold text-danger">
+                {formik.errors.FName}
+              </div>
+            )}
           </div>
           <div className="col-md-2">
             <label htmlFor="inputRollNo." className="form-label">
@@ -63,6 +77,11 @@ const AddStudent = () => {
               title="Roll No. Pattern: '22000'"
               required
             />
+            {formik.errors.rollNo && (
+              <div className="text-center fw-bold text-danger">
+                {formik.errors.rollNo}
+              </div>
+            )}
           </div>
           <div className="col-md-4">
             <label htmlFor="inputDOB" className="form-label">
@@ -77,6 +96,11 @@ const AddStudent = () => {
               title="Student's Date of Birth"
               required
             />
+            {formik.errors.DOB && (
+              <div className="text-center fw-bold text-danger">
+                {formik.errors.DOB}
+              </div>
+            )}
           </div>
           <div className="col-md-4">
             <label htmlFor="inputSNum" className="form-label">
@@ -95,6 +119,11 @@ const AddStudent = () => {
               title="Student's Phone (Phone number Pattern :'923336584571')"
               required
             />
+            {formik.errors.SNum && (
+              <div className="text-center fw-bold text-danger">
+                {formik.errors.SNum}
+              </div>
+            )}
           </div>
           <div className="col-md-4">
             <label htmlFor="inputFNum" className="form-label">
@@ -113,6 +142,11 @@ const AddStudent = () => {
               pattern="[0-9]{12}"
               required
             />
+            {formik.errors.FNum && (
+              <div className="text-center fw-bold text-danger">
+                {formik.errors.FNum}
+              </div>
+            )}
           </div>
           <div className="col-12">
             <label htmlFor="inputAddress" className="form-label">
@@ -128,6 +162,11 @@ const AddStudent = () => {
               title="Student's Address"
               required
             />
+            {formik.errors.address && (
+              <div className="text-center fw-bold text-danger">
+                {formik.errors.address}
+              </div>
+            )}
           </div>
           <div className="col-md-7">
             <label htmlFor="inputCity" className="form-label">
@@ -143,6 +182,11 @@ const AddStudent = () => {
               title="Students City"
               required
             />
+            {formik.errors.city && (
+              <div className="text-center fw-bold text-danger">
+                {formik.errors.city}
+              </div>
+            )}
           </div>
           <div className="col-md-5">
             <label htmlFor="gender" className="form-label">
@@ -161,6 +205,11 @@ const AddStudent = () => {
               <option value="female">Female</option>
               <option value="prefer not to say">Prefer not to say</option>
             </select>
+            {formik.errors.gender && (
+              <div className="text-center fw-bold text-danger">
+                {formik.errors.gender}
+              </div>
+            )}
           </div>
           <div className="col-md-5">
             <label htmlFor="class" className="form-label">
@@ -179,7 +228,12 @@ const AddStudent = () => {
               <option value="10th">10th</option>
               <option value="1st-year">11th</option>
               <option value="2nd-year">12th</option>
-            </select>
+            </select>{" "}
+            {formik.errors.class && (
+              <div className="text-center fw-bold text-danger">
+                {formik.errors.class}
+              </div>
+            )}
           </div>
           <div className="col-md-7">
             <label htmlFor="subjects" className="form-label">
@@ -344,12 +398,23 @@ const AddStudent = () => {
                   <option value="I.com">I.Com</option>
                 </>
               )}
-            </select>
+            </select>{" "}
+            {formik.errors.subjects && (
+              <div className="text-center fw-bold text-danger">
+                {formik.errors.subjects}
+              </div>
+            )}
           </div>
 
           <div className="col-12 text-center mt-4">
-            <button type="submit" className="btn btn-dark px-5">
-              Register
+            <button
+              type="submit"
+              className="btn btn-dark px-5"
+              // onClick={() => {
+              //   alert(formik.values);
+              // }}
+            >
+              Submit
             </button>
           </div>
         </form>
