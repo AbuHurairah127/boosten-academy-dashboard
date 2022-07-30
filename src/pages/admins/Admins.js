@@ -24,7 +24,7 @@ const Admins = () => {
           <div className="border-bottom border-secondary mt-3 w-75 m-auto"></div>
           <div className="row">
             <div className="col">
-              <h1 className="display-5 text-center">List of Students</h1>
+              <h1 className="display-5 text-center">List of Admins</h1>
             </div>
           </div>
           <table className="table">
