@@ -1,7 +1,9 @@
 import React from "react";
 import "./Login.css";
+import useLogin from "./useLogin";
 
 const Login = () => {
+  const { formik } = useLogin();
   return (
     <div className="container-fluid loginPage d-flex flex-column justify-content-between">
       <div className="row">
@@ -18,27 +20,33 @@ const Login = () => {
           <div className="row">
             <h1 className="text-center">Login</h1>
           </div>
-          <form className="d-flex flex-column">
+          <form className="d-flex flex-column" onSubmit={formik.handleSubmit}>
             <div className="row mb-3">
-              <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">
-                Email
+              <label htmlFor="email" className="col-sm-2 col-form-label">
+                Email:
               </label>
               <div className="col-sm-10">
-                <input type="email" className="form-control" id="inputEmail3" />
+                <input
+                  type="email"
+                  className="form-control"
+                  id="email"
+                  value={formik.values.email}
+                  onChange={formik.handleChange}
+                  required
+                />
               </div>
             </div>
             <div className="row mb-3">
-              <label
-                htmlFor="inputPassword3"
-                className="col-sm-2 col-form-label"
-              >
-                Password
+              <label htmlFor="password" className="col-sm-2 col-form-label">
+                Password:
               </label>
               <div className="col-sm-10">
                 <input
                   type="password"
                   className="form-control"
-                  id="inputPassword3"
+                  id="password"
+                  value={formik.values.password}
+                  onChange={formik.handleChange}
                 />
               </div>
             </div>
