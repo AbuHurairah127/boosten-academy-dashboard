@@ -2,7 +2,6 @@ import { LOGIN, LOGOUT } from "../types/constants";
 
 let initialState = {
   isUserAuthenticated: false,
-  isProcessing: false,
 };
 
 const authReducer = (state = initialState, action) => {

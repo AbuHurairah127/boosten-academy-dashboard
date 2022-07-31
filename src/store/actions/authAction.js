@@ -1,6 +1,6 @@
 import { LOGIN, LOGOUT } from "../types/constants";
 import { auth } from "./../../config/firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 export const login = (data) => async (dispatch) => {
   try {
@@ -18,14 +18,33 @@ export const login = (data) => async (dispatch) => {
       payload: data,
     });
   } catch (error) {
-    const errorCode = error.code;
     const errorMessage = error.message;
     window.notify(errorMessage, "error");
   }
 };
-export const logout = (data) => {
-  return {
-    type: LOGOUT,
-    payload: data,
-  };
+export const logout = () => async (dispatch) => {
+  try {
+    await signOut(auth);
+    window.notify("User have been successfully logged out", "success");
+    dispatch({
+      type: LOGOUT,
+    });
+  } catch (error) {}
+};
+export const fetchUser = (setPreLoader) => async (dispatch) => {
+  try {
+    setPreLoader(true);
+    await auth.onAuthStateChanged((user) => {
+      if (user) {
+        dispatch({
+          type: LOGIN,
+          // payload: user,
+        });
+      }
+    });
+  } catch (error) {
+    window.notify(error.message, "success");
+  } finally {
+    setPreLoader(false);
+  }
 };

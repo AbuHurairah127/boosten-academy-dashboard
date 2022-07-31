@@ -4,7 +4,6 @@ const useNavbar = () => {
   const dispatch = useDispatch();
   const logoutUser = () => {
     dispatch(logout());
-    window.notify("User have been successfully logged out.", "success");
   };
   return { logoutUser };
 };

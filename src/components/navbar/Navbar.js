@@ -7,9 +7,9 @@ const Navbar = () => {
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
-            Boosten Academy
-          </a>
+          <Link className="navbar-brand" to="/">
+            Gulberg Boston Academy
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -45,7 +45,7 @@ const Navbar = () => {
             <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle"
-                href="#"
+                href="/"
                 id="navbarDropdown"
                 role="button"
                 data-bs-toggle="dropdown"
@@ -60,17 +60,17 @@ const Navbar = () => {
                   </Link>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <Link className="dropdown-item" to="add-marks">
                     Add Marks
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <hr className="dropdown-divider" />
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <Link className="dropdown-item" to="/">
                     Something else here
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </li>

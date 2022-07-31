@@ -7,10 +7,10 @@ window.notify = (msg, type) => {
     case "error":
       toast.error(msg);
       break;
-    case "success":
+    case "info":
       toast.info(msg);
       break;
-    case "success":
+    case "warning":
       toast.warning(msg);
       break;
 
