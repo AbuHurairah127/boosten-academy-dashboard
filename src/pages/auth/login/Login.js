@@ -1,16 +1,18 @@
 import React from "react";
+import ButtonLoader from "../../../components/buttonLoader/ButtonLoader";
 import "./Login.css";
 import useLogin from "./useLogin";
-
+import { useSelector } from "react-redux";
 const Login = () => {
   const { formik } = useLogin();
+  const isProcessing = useSelector((store) => store.authReducer.isProcessing);
   return (
     <div className="container-fluid loginPage d-flex flex-column justify-content-between">
       <div className="row">
         <nav className="navbar navbar-dark bg-dark">
           <div className="container-fluid">
             <span className="navbar-brand  h1 text-center">
-              Boosten Academy
+              Gulberg Boston Academy
             </span>
           </div>
         </nav>
@@ -34,6 +36,11 @@ const Login = () => {
                   onChange={formik.handleChange}
                   required
                 />
+                {formik.errors.email && (
+                  <div className="text-danger fw-bold text-center fs-5">
+                    {formik.errors.email}
+                  </div>
+                )}
               </div>
             </div>
             <div className="row mb-3">
@@ -47,13 +54,33 @@ const Login = () => {
                   id="password"
                   value={formik.values.password}
                   onChange={formik.handleChange}
+                  required
                 />
+                {formik.errors.password && (
+                  <div className="text-danger fw-bold text-center fs-5">
+                    {formik.errors.password}
+                  </div>
+                )}
               </div>
             </div>
             <div className="align-self-center">
-              <button type="submit" className="btn btn-dark px-5">
-                Sign in
-              </button>
+              {isProcessing ? (
+                <button
+                  type="button"
+                  className="btn btn-dark px-5"
+                  disabled={isProcessing}
+                >
+                  <ButtonLoader
+                    size={11}
+                    loading={isProcessing}
+                    color="white"
+                  />
+                </button>
+              ) : (
+                <button type="submit" className="btn btn-dark px-5">
+                  Sign in
+                </button>
+              )}
             </div>
           </form>
         </div>

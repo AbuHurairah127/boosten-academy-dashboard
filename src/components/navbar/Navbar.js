@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import useNavbar from "./useNavbar";
 const Navbar = () => {
+  const { logoutUser } = useNavbar();
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -40,55 +41,7 @@ const Navbar = () => {
                 Admins
               </Link>
             </li>
-            {/* <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Classes
-              </a>
-              <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li>
-                  <button
-                    className="dropdown-item"
-                    onClick={() => console.log("9th Class")}
-                  >
-                    9th
-                  </button>
-                </li>
-                <li>
-                  <button
-                    className="dropdown-item"
-                    onClick={() => console.log("10th Class")}
-                  >
-                    10th
-                  </button>
-                </li>
-                <li>
-                  <hr className="dropdown-divider" />
-                </li>
-                <li>
-                  <button
-                    className="dropdown-item"
-                    onClick={() => console.log("1st year")}
-                  >
-                    1st-year
-                  </button>
-                </li>
-                <li>
-                  <button
-                    className="dropdown-item"
-                    onClick={() => console.log("2nd year")}
-                  >
-                    2nd-year
-                  </button>
-                </li>
-              </ul>
-            </li> */}
+
             <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle"
@@ -123,7 +76,9 @@ const Navbar = () => {
             </li>
             <li className="nav-item"></li>
           </ul>
-          <button className="btn btn-outline-light mx-4">Logout</button>
+          <button className="btn btn-outline-light mx-4" onClick={logoutUser}>
+            Logout
+          </button>
         </div>
       </nav>
     </div>
