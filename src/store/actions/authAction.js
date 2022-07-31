@@ -45,6 +45,8 @@ export const fetchUser = (setPreLoader) => async (dispatch) => {
   } catch (error) {
     window.notify(error.message, "success");
   } finally {
-    setPreLoader(false);
+    setTimeout(() => {
+      setPreLoader(false);
+    }, 2000);
   }
 };
