@@ -3,7 +3,9 @@ import * as yup from "yup";
 import { useDispatch } from "react-redux/es/exports";
 import { login } from "../../../store/actions/authAction";
 import { useState } from "react";
+import { Navigate } from "react-router-dom";
 const useLogin = () => {
+  const [isProcessing, setIsProcessing] = useState(false);
   const [passwordAppearance, setPasswordAppearance] = useState(false);
   const dispatch = useDispatch();
   const formik = useFormik({
@@ -15,11 +17,11 @@ const useLogin = () => {
         .min(8, "Password must be at least of 8 characters.")
         .required("Required"),
     }),
-    onSubmit: (values) => {
-      dispatch(login(values));
+    onSubmit: async (values) => {
+      await dispatch(login(values, setIsProcessing));
     },
   });
-  return { formik, setPasswordAppearance, passwordAppearance };
+  return { formik, setPasswordAppearance, passwordAppearance, isProcessing };
 };
 
 export default useLogin;

@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import useNavbar from "./useNavbar";
 const Navbar = () => {
   const { logoutUser } = useNavbar();
+  let user = localStorage.getItem("user");
+  let userRole = JSON.parse(user).role;
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -36,11 +38,13 @@ const Navbar = () => {
                 Students
               </Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/admins">
-                Admins
-              </Link>
-            </li>
+            {userRole === "superAdmin" && (
+              <li className="nav-item">
+                <Link className="nav-link" to="/admins">
+                  Admins
+                </Link>
+              </li>
+            )}
 
             <li className="nav-item dropdown">
               <a
@@ -64,14 +68,19 @@ const Navbar = () => {
                     Add Marks
                   </Link>
                 </li>
-                <li>
-                  <hr className="dropdown-divider" />
-                </li>
-                <li>
-                  <Link className="dropdown-item" to="/add-admins">
-                    Add Admins
-                  </Link>
-                </li>
+
+                {userRole === "superAdmin" && (
+                  <>
+                    <li>
+                      <hr className="dropdown-divider" />
+                    </li>
+                    <li>
+                      <Link className="dropdown-item" to="/add-admins">
+                        Add Admins
+                      </Link>
+                    </li>
+                  </>
+                )}
               </ul>
             </li>
             <li className="nav-item"></li>

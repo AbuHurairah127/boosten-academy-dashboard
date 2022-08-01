@@ -9,7 +9,11 @@ const FullScreenLoader = () => {
         minHeight: "100vh",
       }}
     >
-      <img src={logo} alt="Gulberg Boston Academy" />
+      <img
+        src={logo}
+        alt="Gulberg Boston Academy"
+        className="imgFullScreenLoader"
+      />
     </div>
   );
 };

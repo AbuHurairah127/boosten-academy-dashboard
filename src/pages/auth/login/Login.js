@@ -5,8 +5,8 @@ import useLogin from "./useLogin";
 import { useSelector } from "react-redux";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 const Login = () => {
-  const { formik, passwordAppearance, setPasswordAppearance } = useLogin();
-  const isProcessing = useSelector((store) => store.authReducer.isProcessing);
+  const { formik, passwordAppearance, setPasswordAppearance, isProcessing } =
+    useLogin();
   return (
     <div className="container-fluid loginPage d-flex flex-column justify-content-between">
       <div className="row">
