@@ -1,9 +1,17 @@
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addAdmin } from "../../store/actions/adminAction";
+import { useSelector } from "react-redux/es/exports";
+
 const useAddAdmins = () => {
+  const dispatch = useDispatch();
+  const [loader, setLoader] = useState(false);
   const [passwordAppearance, setPasswordAppearance] = useState(false);
   const [cPasswordAppearance, setCPasswordAppearance] = useState(false);
+  const adminSignedIn = useSelector((store) => store.authReducer.adminSignedIn);
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -37,6 +45,15 @@ const useAddAdmins = () => {
         .min(20, "address must contain at least 20 characters.")
         .required("Required"),
     }),
+    onSubmit: (values) => {
+      values.role = "admin";
+
+      if (values.password === values.confirmPassword) {
+        dispatch(addAdmin(values, setLoader, adminSignedIn));
+      } else {
+        window.notify("Password and Confirm Password don't match", "warning");
+      }
+    },
   });
   return {
     formik,
@@ -44,6 +61,7 @@ const useAddAdmins = () => {
     setPasswordAppearance,
     cPasswordAppearance,
     setCPasswordAppearance,
+    loader,
   };
 };
 

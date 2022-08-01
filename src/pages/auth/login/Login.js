@@ -3,8 +3,9 @@ import ButtonLoader from "../../../components/buttonLoader/ButtonLoader";
 import "./Login.css";
 import useLogin from "./useLogin";
 import { useSelector } from "react-redux";
+import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 const Login = () => {
-  const { formik } = useLogin();
+  const { formik, passwordAppearance, setPasswordAppearance } = useLogin();
   const isProcessing = useSelector((store) => store.authReducer.isProcessing);
   return (
     <div className="container-fluid loginPage d-flex flex-column justify-content-between">
@@ -47,21 +48,63 @@ const Login = () => {
               <label htmlFor="password" className="col-sm-2 col-form-label">
                 Password:
               </label>
-              <div className="col-sm-10">
-                <input
-                  type="password"
-                  className="form-control"
-                  id="password"
-                  value={formik.values.password}
-                  onChange={formik.handleChange}
-                  required
-                />
-                {formik.errors.password && (
-                  <div className="text-danger fw-bold text-center fs-5">
-                    {formik.errors.password}
+              {passwordAppearance ? (
+                <div className="col-sm-10">
+                  <div className="d-flex align-items-center justify-content-space-between ">
+                    <input
+                      type="text"
+                      className="form-control "
+                      id="password"
+                      value={formik.values.password}
+                      onChange={formik.handleChange}
+                      required
+                    />
+                    <AiFillEyeInvisible
+                      size={20}
+                      style={{
+                        marginLeft: 10,
+                        cursor: "pointer",
+                      }}
+                      onClick={() => {
+                        setPasswordAppearance(!passwordAppearance);
+                      }}
+                    />
                   </div>
-                )}
-              </div>
+                  {formik.errors.password && (
+                    <div className="text-danger fw-bold text-center fs-5">
+                      {formik.errors.password}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className="col-sm-10">
+                  <div className="d-flex align-items-center justify-content-space-between ">
+                    <input
+                      type="password"
+                      className="form-control "
+                      id="password"
+                      value={formik.values.password}
+                      onChange={formik.handleChange}
+                      required
+                    />
+                    <AiFillEye
+                      size={20}
+                      style={{
+                        marginLeft: 10,
+                        cursor: "pointer",
+                      }}
+                      onClick={() => {
+                        setPasswordAppearance(!passwordAppearance);
+                      }}
+                    />
+                  </div>
+                  {formik.errors.password && (
+                    <div className="text-danger fw-bold text-center fs-5">
+                      {formik.errors.password}
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
             <div className="align-self-center">
               {isProcessing ? (

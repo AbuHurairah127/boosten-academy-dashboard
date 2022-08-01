@@ -39,13 +39,7 @@ const Admins = () => {
                 <th scope="col" className="text-center">
                   Father Name
                 </th>
-                <th scope="col" className="text-center">
-                  Roll No.
-                </th>
 
-                <th scope="col" className="text-center">
-                  Class
-                </th>
                 <th scope="col" className="text-center">
                   Actions
                 </th>
@@ -54,12 +48,10 @@ const Admins = () => {
             <tbody>
               {students.map((item, index) => {
                 return (
-                  <tr>
+                  <tr key={index}>
                     <td className="text-center">{index + 1}</td>
                     <td className="text-center">{item.name}</td>
                     <td className="text-center">{item.fatherName}</td>
-                    <td className="text-center">{item.rollNo}</td>
-                    <td className="text-center">{item.class}</td>
 
                     <td className="text-center">
                       <button

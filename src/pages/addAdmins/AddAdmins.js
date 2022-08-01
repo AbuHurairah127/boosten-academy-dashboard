@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import useAddAdmins from "./useAddAdmins";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
-
+import ButtonLoader from "./../../components/buttonLoader/ButtonLoader";
 const AddAdmins = () => {
   const {
     formik,
@@ -11,6 +11,7 @@ const AddAdmins = () => {
     setPasswordAppearance,
     cPasswordAppearance,
     setCPasswordAppearance,
+    loader,
   } = useAddAdmins();
   return (
     <div
@@ -32,7 +33,7 @@ const AddAdmins = () => {
             </div>
             <h1 className="align-items-center">Add Admins</h1>
           </div>
-          <form className="row g-3">
+          <form className="row g-3" onSubmit={formik.handleSubmit}>
             <div className="col-md-6">
               <label htmlFor="email" className="form-label">
                 Email
@@ -224,8 +225,8 @@ const AddAdmins = () => {
                 type="text"
                 className="form-control"
                 id="FName"
+                name="fatherName"
                 placeholder="Full Name e.g. Muhammad Shafique"
-                value={formik.values.fatherName}
                 onChange={formik.handleChange}
                 required
               />
@@ -258,8 +259,9 @@ const AddAdmins = () => {
               <button
                 type="submit"
                 className="btn btn-outline-dark px-5 fw-bold"
+                disabled={loader}
               >
-                Register
+                {loader ? <ButtonLoader size={13} /> : "Register"}
               </button>
             </div>
           </form>

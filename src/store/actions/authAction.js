@@ -9,9 +9,6 @@ export const login = (data) => async (dispatch) => {
       data.email,
       data.password
     );
-
-    const user = userCredential.user;
-    console.log(user);
     window.notify("User have been successfully signed in", "success");
     dispatch({
       type: LOGIN,

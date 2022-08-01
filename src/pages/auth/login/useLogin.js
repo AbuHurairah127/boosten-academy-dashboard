@@ -2,8 +2,9 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import { useDispatch } from "react-redux/es/exports";
 import { login } from "../../../store/actions/authAction";
-
+import { useState } from "react";
 const useLogin = () => {
+  const [passwordAppearance, setPasswordAppearance] = useState(false);
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: { email: "", password: "" },
@@ -18,7 +19,7 @@ const useLogin = () => {
       dispatch(login(values));
     },
   });
-  return { formik };
+  return { formik, setPasswordAppearance, passwordAppearance };
 };
 
 export default useLogin;

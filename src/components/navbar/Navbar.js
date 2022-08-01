@@ -68,8 +68,8 @@ const Navbar = () => {
                   <hr className="dropdown-divider" />
                 </li>
                 <li>
-                  <Link className="dropdown-item" to="/">
-                    Something else here
+                  <Link className="dropdown-item" to="/add-admins">
+                    Add Admins
                   </Link>
                 </li>
               </ul>
