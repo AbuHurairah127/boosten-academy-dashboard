@@ -3,15 +3,13 @@ import * as yup from "yup";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addAdmin } from "../../store/actions/adminAction";
-import { useSelector } from "react-redux/es/exports";
 
 const useAddAdmins = () => {
   const dispatch = useDispatch();
   const [loader, setLoader] = useState(false);
   const [passwordAppearance, setPasswordAppearance] = useState(false);
   const [cPasswordAppearance, setCPasswordAppearance] = useState(false);
-  const adminSignedIn = useSelector((store) => store.authReducer.adminSignedIn);
-
+  const adminSignedIn = JSON.parse(localStorage.getItem("userCredentials"));
   const formik = useFormik({
     initialValues: {
       email: "",

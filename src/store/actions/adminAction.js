@@ -9,7 +9,7 @@ import { LOGIN, LOGOUT } from "../types/constants";
 import { doc, setDoc } from "firebase/firestore/lite";
 
 export const addAdmin =
-  (data, setLoader, adminSignedIn, setAddAdminLoader) => async (dispatch) => {
+  (data, setLoader, adminSignedIn) => async (dispatch) => {
     try {
       setLoader(true);
       const userCredential = await createUserWithEmailAndPassword(
@@ -18,7 +18,6 @@ export const addAdmin =
         data.password
       );
       let userData = userCredential.user;
-      console.log(userData.uid);
       updateProfile(userData, {
         displayName: data.name,
       });
@@ -34,8 +33,6 @@ export const addAdmin =
         window.notify(error.message, "error");
       }
 
-      console.log(auth.currentUser);
-      console.log(adminSignedIn);
       try {
         await signOut(auth);
         dispatch({
@@ -50,7 +47,6 @@ export const addAdmin =
           adminSignedIn.email,
           adminSignedIn.password
         );
-        console.log(auth.currentUser);
         dispatch({
           type: LOGIN,
           payload: adminSignedIn,
