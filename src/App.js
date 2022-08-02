@@ -17,7 +17,6 @@ const App = () => {
     async function fetchData() {
       setPreLoader(true);
       try {
-        console.log(userCredentials);
         if (userCredentials) {
           await signInWithEmailAndPassword(
             auth,

@@ -5,8 +5,15 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth, db } from "./../../config/firebase";
-import { LOGIN, LOGOUT } from "../types/constants";
-import { doc, setDoc } from "firebase/firestore/lite";
+import { FETCH_ALL_ADMINS, LOGIN, LOGOUT } from "../types/constants";
+import {
+  doc,
+  setDoc,
+  getDocs,
+  where,
+  query,
+  collection,
+} from "firebase/firestore/lite";
 
 export const addAdmin =
   (data, setLoader, adminSignedIn) => async (dispatch) => {
@@ -65,3 +72,23 @@ export const addAdmin =
       }, 1000);
     }
   };
+export const readAdmin = (setFetchLoader) => async (dispatch) => {
+  try {
+    setFetchLoader(true);
+    let array = [];
+    const q = query(collection(db, "admins"), where("role", "==", "admin"));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      let data = doc.data();
+      array.push(data);
+    });
+    dispatch({
+      type: FETCH_ALL_ADMINS,
+      payload: array,
+    });
+  } catch (error) {
+    window.notify(error.message, "error");
+  } finally {
+    setTimeout(() => setFetchLoader(false), 2500);
+  }
+};
