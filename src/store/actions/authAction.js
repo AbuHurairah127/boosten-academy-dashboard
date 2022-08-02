@@ -8,51 +8,50 @@ export const login = (data, setIsProcessing) => async (dispatch) => {
     setIsProcessing(true);
     await signInWithEmailAndPassword(auth, data.email, data.password);
     let user = auth.currentUser;
-    console.log(user);
     const docSnap = await getDoc(doc(db, "admins", user.uid));
     let userData = docSnap.data();
-    console.log(userData);
     localStorage.setItem("user", JSON.stringify(userData));
-    window.notify("User have been successfully signed in", "success");
     if (docSnap.exists()) {
       dispatch({
         type: LOGIN,
         payload: userData,
       });
     }
+    setIsProcessing(false);
+    let result = window.confirm("You want to keep this user signed in?");
+    if (result) {
+      localStorage.setItem(
+        "userCredentials",
+        JSON.stringify({ email: data.email, password: data.password })
+      );
+      window.notify("User have been successfully signed in", "success");
+    } else {
+      window.notify(
+        "You have to resign your account when you refresh the web",
+        "warning"
+      );
+    }
   } catch (error) {
     const errorMessage = error.message;
     window.notify(errorMessage, "error");
   } finally {
-    setIsProcessing(false);
+    // setIsProcessing(false);
   }
 };
 export const logout = () => async (dispatch) => {
   try {
     await signOut(auth);
     localStorage.removeItem("user");
+    localStorage.removeItem("userCredentials");
     window.notify("User have been successfully logged out", "success");
     dispatch({
       type: LOGOUT,
     });
   } catch (error) {}
 };
-export const fetchUser = (setPreLoader) => async (dispatch) => {
-  try {
-    setPreLoader(true);
-    await auth.onAuthStateChanged((user) => {
-      if (user) {
-        dispatch({
-          type: LOGIN,
-          payload: user,
-        });
-      }
-    });
-  } catch (error) {
-    window.notify(error.message, "success");
-  } finally {
-    setTimeout(() => {
-      setPreLoader(false);
-    }, 2000);
-  }
+export const fetchUser = (setPreLoader, data) => {
+  return {
+    type: LOGIN,
+    payload: data,
+  };
 };

@@ -9,13 +9,21 @@ import AddAdmins from "../pages/addAdmins/AddAdmins";
 import PrivateRoutes from "./PrivateRoutes";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
+import NotFound from "../pages/notFound/NotFound";
+
 const Routing = () => {
   const isUserAuthenticated = useSelector(
     (store) => store.authReducer.isUserAuthenticated
   );
+  let userRole;
+  if (isUserAuthenticated === true) {
+    userRole = localStorage.getItem("user");
+    userRole = JSON.parse(userRole).role;
+  }
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="*" to={<NotFound />} />
         <Route
           path="/login"
           element={isUserAuthenticated ? <Navigate to="/" /> : <Login />}
@@ -25,16 +33,39 @@ const Routing = () => {
           path="/add-students"
           element={<PrivateRoutes Component={AddStudents} />}
         />
-        <Route
-          path="/add-admins"
-          element={<PrivateRoutes Component={AddAdmins} />}
-        />
         <Route path="/login" element={<Login />} />
         <Route
           path="/students"
           element={<PrivateRoutes Component={Students} />}
         />
-        <Route path="/admins" element={<PrivateRoutes Component={Admins} />} />
+        <Route
+          path="/add-admins"
+          element={
+            isUserAuthenticated ? (
+              userRole === "superAdmin" ? (
+                <PrivateRoutes Component={AddAdmins} />
+              ) : (
+                <Navigate to="/" />
+              )
+            ) : (
+              <PrivateRoutes Component={AddAdmins} />
+            )
+          }
+        />
+        <Route
+          path="/admins"
+          element={
+            isUserAuthenticated ? (
+              userRole === "superAdmin" ? (
+                <PrivateRoutes Component={Admins} />
+              ) : (
+                <Navigate to="/" />
+              )
+            ) : (
+              <PrivateRoutes Component={Admins} />
+            )
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
