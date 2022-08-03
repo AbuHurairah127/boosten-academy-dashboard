@@ -90,10 +90,17 @@ export const readAdmin = (setFetchLoader) => async (dispatch) => {
       let data = doc.data();
       array.push(data);
     });
-    dispatch({
-      type: FETCH_ALL_ADMINS,
-      payload: array,
-    });
+    if (array.length > 0) {
+      dispatch({
+        type: FETCH_ALL_ADMINS,
+        payload: array,
+      });
+    } else {
+      window.notify(
+        "You have no admins available.Please add them via clicking on the button 👈🏻",
+        "info"
+      );
+    }
   } catch (error) {
     window.notify(error.message, "error");
   } finally {
