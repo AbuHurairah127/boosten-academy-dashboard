@@ -6,7 +6,13 @@ import { Link } from "react-router-dom";
 import useAdmins from "./useAdmins";
 
 const Admins = () => {
-  const { adminsList, fetchLoader, adminFetching } = useAdmins();
+  const {
+    adminsList,
+    fetchLoader,
+    adminFetching,
+    adminDeleting,
+    buttonLoader,
+  } = useAdmins();
   return (
     <div className="d-flex flex-column studentsContainer">
       <Navbar />
@@ -80,8 +86,16 @@ const Admins = () => {
                         >
                           Update
                         </button>
-                        <button className="btn btn-outline-danger mx-2">
-                          Delete
+                        <button
+                          className="btn btn-outline-danger mx-2"
+                          onClick={() => adminDeleting(item.uid)}
+                          disabled={buttonLoader}
+                        >
+                          {buttonLoader ? (
+                            <ButtonLoader color="red" size={12} />
+                          ) : (
+                            "Delete"
+                          )}
                         </button>
                       </td>
                     </tr>

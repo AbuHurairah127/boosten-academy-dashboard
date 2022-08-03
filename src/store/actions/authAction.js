@@ -10,26 +10,36 @@ export const login = (data, setIsProcessing) => async (dispatch) => {
     let user = auth.currentUser;
     const docSnap = await getDoc(doc(db, "admins", user.uid));
     let userData = docSnap.data();
-    localStorage.setItem("user", JSON.stringify(userData));
-    if (docSnap.exists()) {
-      dispatch({
-        type: LOGIN,
-        payload: userData,
-      });
-    }
-    setIsProcessing(false);
-    let result = window.confirm("You want to keep this user signed in?");
-    if (result) {
-      localStorage.setItem(
-        "userCredentials",
-        JSON.stringify({ email: data.email, password: data.password })
-      );
-      window.notify("User have been successfully signed in", "success");
-    } else {
+    if (!userData) {
+      signOut(auth);
+      dispatch({ type: LOGOUT });
+      setIsProcessing(false);
       window.notify(
-        "You have to resign your account when you refresh the web",
+        "You're not allowed to login.Please! contact management for further details.",
         "warning"
       );
+    } else {
+      localStorage.setItem("user", JSON.stringify(userData));
+      if (docSnap.exists()) {
+        dispatch({
+          type: LOGIN,
+          payload: userData,
+        });
+      }
+      setIsProcessing(false);
+      let result = window.confirm("You want to keep this user signed in?");
+      if (result) {
+        localStorage.setItem(
+          "userCredentials",
+          JSON.stringify({ email: data.email, password: data.password })
+        );
+        window.notify("User have been successfully signed in", "success");
+      } else {
+        window.notify(
+          "You have to resign your account when you refresh the web",
+          "warning"
+        );
+      }
     }
   } catch (error) {
     const errorMessage = error.message;

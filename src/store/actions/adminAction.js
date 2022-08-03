@@ -5,11 +5,17 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth, db } from "./../../config/firebase";
-import { FETCH_ALL_ADMINS, LOGIN, LOGOUT } from "../types/constants";
+import {
+  FETCH_ALL_ADMINS,
+  LOGIN,
+  LOGOUT,
+  DELETE_ADMINS,
+} from "../types/constants";
 import {
   doc,
   setDoc,
   getDocs,
+  deleteDoc,
   where,
   query,
   collection,
@@ -90,5 +96,19 @@ export const readAdmin = (setFetchLoader) => async (dispatch) => {
     window.notify(error.message, "error");
   } finally {
     setTimeout(() => setFetchLoader(false), 2500);
+  }
+};
+export const deleteAdmin = (data, setButtonLoader) => async (dispatch) => {
+  try {
+    setButtonLoader(true);
+    await deleteDoc(doc(db, "admins", data));
+    dispatch({
+      type: DELETE_ADMINS,
+      payload: data,
+    });
+  } catch (error) {
+    window.notify(error.message, "error");
+  } finally {
+    setTimeout(() => setButtonLoader(false), 500);
   }
 };
