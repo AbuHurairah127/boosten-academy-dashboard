@@ -10,6 +10,7 @@ import {
   LOGIN,
   LOGOUT,
   DELETE_ADMINS,
+  UPDATE_ADMINS,
 } from "../types/constants";
 import {
   doc,
@@ -40,6 +41,7 @@ export const addAdmin =
           fatherName: data.fatherName,
           address: data.address,
           uid: userData.uid,
+          email: data.email,
           role: data.role,
         });
       } catch (error) {
@@ -112,3 +114,29 @@ export const deleteAdmin = (data, setButtonLoader) => async (dispatch) => {
     setTimeout(() => setButtonLoader(false), 500);
   }
 };
+export const adminUpdate =
+  (data, setUpdateButtonLoader) => async (dispatch) => {
+    try {
+      setUpdateButtonLoader(true);
+      const updateAdminRef = doc(db, "admins", data.uid);
+      await setDoc(
+        updateAdminRef,
+        {
+          name: data.name,
+          fatherName: data.fatherName,
+          email: data.email,
+          address: data.address,
+        },
+        { merge: true }
+      );
+      dispatch({
+        type: UPDATE_ADMINS,
+        payload: data,
+      });
+      window.notify("Admin has been successfully updated!", "success");
+    } catch (error) {
+      window.notify(error.message, "error");
+    } finally {
+      setUpdateButtonLoader(false);
+    }
+  };
