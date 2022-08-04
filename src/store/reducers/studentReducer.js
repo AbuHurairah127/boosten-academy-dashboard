@@ -1,4 +1,4 @@
-import { FETCH_STUDENT } from "./../types/constants";
+import { DELETE_STUDENTS, FETCH_STUDENT } from "./../types/constants";
 
 let initialState = {
   studentsList: [],
@@ -12,7 +12,15 @@ const studentReducer = (state = initialState, action) => {
         studentsList: newStudentList,
       };
     }
-
+    case DELETE_STUDENTS: {
+      let newStudentList = state.studentsList.filter(
+        (student) => student.uid !== action.payload
+      );
+      return {
+        ...state,
+        studentsList: newStudentList,
+      };
+    }
     default:
       return state;
   }

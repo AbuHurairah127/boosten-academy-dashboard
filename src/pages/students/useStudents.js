@@ -4,12 +4,14 @@ import {
   readSingleStudent,
   readClass,
   readClassOnSubjects,
+  deleteStudent,
 } from "./../../store/actions/studentAction";
 import { useFormik } from "formik";
 import * as yup from "yup";
 const useStudents = () => {
   const [fetchStudentRollNo, setFetchStudentRollNo] = useState("");
   const [fetchLoader, setFetchLoader] = useState(false);
+  const [buttonLoader, setButtonLoader] = useState(false);
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
@@ -46,12 +48,17 @@ const useStudents = () => {
     }
     setFetchStudentRollNo("");
   };
+  const onDeleteHandler = (studentID) => {
+    dispatch(deleteStudent(studentID, setButtonLoader));
+  };
   return {
     fetchStudentRollNo,
     setFetchStudentRollNo,
     fetchLoader,
     fetchSingleStudent,
+    onDeleteHandler,
     formik,
+    buttonLoader,
   };
 };
 

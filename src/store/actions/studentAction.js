@@ -14,8 +14,12 @@ import {
   query,
   collection,
 } from "firebase/firestore/lite";
-import { LOGIN, LOGOUT, FETCH_STUDENT } from "../types/constants";
-import { login } from "./authAction";
+import {
+  LOGIN,
+  LOGOUT,
+  FETCH_STUDENT,
+  DELETE_STUDENTS,
+} from "../types/constants";
 export const createStudent =
   (data, setButtonLoader, adminSignedIn) => async (dispatch) => {
     try {
@@ -43,6 +47,7 @@ export const createStudent =
           gender: data.gender,
           class: data.class,
           subjects: data.subjects,
+          uid: userData.uid,
         });
       } catch (error) {
         window.notify(error.message, "error");
@@ -173,3 +178,18 @@ export const readClassOnSubjects =
       setFetchLoader(false);
     }
   };
+export const deleteStudent = (data, setButtonLoader) => async (dispatch) => {
+  try {
+    setButtonLoader(true);
+    await deleteDoc(doc(db, "students", data));
+    dispatch({
+      type: DELETE_STUDENTS,
+      payload: data,
+    });
+  } catch (error) {
+    console.log(error.message);
+    window.notify(error.message, "error");
+  } finally {
+    setTimeout(() => setButtonLoader(false), 500);
+  }
+};

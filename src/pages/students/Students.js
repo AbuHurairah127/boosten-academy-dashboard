@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import "./students.css";
 import useStudents from "./useStudents";
 import ButtonLoader from "./../../components/buttonLoader/ButtonLoader";
+import { AiFillEdit, AiFillDelete, AiFillEye } from "react-icons/ai";
 const Students = () => {
   const students = useSelector((store) => store.studentReducer.studentsList);
   const {
@@ -14,6 +15,8 @@ const Students = () => {
     fetchLoader,
     fetchSingleStudent,
     formik,
+    onDeleteHandler,
+    buttonLoader,
   } = useStudents();
   return (
     <div className="d-flex flex-column studentsContainer">
@@ -90,13 +93,20 @@ const Students = () => {
                           data-bs-toggle="modal"
                           data-bs-target="#staticBackdrop"
                         >
-                          Update
+                          <AiFillEdit />
                         </button>
-                        <button className="btn btn-outline-danger mx-2">
-                          Delete
+                        <button
+                          className="btn btn-outline-danger mx-2"
+                          onClick={() => onDeleteHandler(item.uid)}
+                        >
+                          {buttonLoader ? (
+                            <ButtonLoader color="red" size={10} />
+                          ) : (
+                            <AiFillDelete />
+                          )}
                         </button>
                         <button className="btn btn-outline-primary px-2">
-                          View
+                          <AiFillEye />
                         </button>
                       </td>
                     </tr>
