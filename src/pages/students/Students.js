@@ -66,6 +66,9 @@ const Students = () => {
                     Class
                   </th>
                   <th scope="col" className="text-center">
+                    Gender
+                  </th>
+                  <th scope="col" className="text-center">
                     Actions
                   </th>
                 </tr>
@@ -79,6 +82,7 @@ const Students = () => {
                       <td className="text-center">{item.fatherName}</td>
                       <td className="text-center">{item.rollNo}</td>
                       <td className="text-center">{item.class}</td>
+                      <td className="text-center">{item.gender}</td>
 
                       <td className="text-center">
                         <button

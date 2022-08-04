@@ -210,9 +210,9 @@ const AddStudent = () => {
                 required
               >
                 <option value="">Choose Gender</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="prefer not to say">Prefer not to say</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Prefer not to say">Prefer not to say</option>
               </select>
               {formik.errors.gender && (
                 <div className="text-center fw-bold text-danger">

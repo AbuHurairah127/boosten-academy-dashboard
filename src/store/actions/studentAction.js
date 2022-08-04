@@ -15,6 +15,7 @@ import {
   collection,
 } from "firebase/firestore/lite";
 import { LOGIN, LOGOUT, FETCH_STUDENT } from "../types/constants";
+import { login } from "./authAction";
 export const createStudent =
   (data, setButtonLoader, adminSignedIn) => async (dispatch) => {
     try {
@@ -112,32 +113,15 @@ export const readClass = (data, setFetchLoader) => async (dispatch) => {
   try {
     setFetchLoader(true);
     let array = [];
-    if (data.class !== "" && data.subject !== "") {
-      console.log("if");
-      const q = query(
-        collection(db, "students"),
-        where("subjects", "==", data.subjects)
-      );
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
-        let data = doc.data();
-        array.push(data);
-      });
-      if (data.class === "9th" || data.class === "10th") {
-        array = array.filter((student) => student.class === data.class);
-      }
-    } else {
-      console.log("else");
-      const q = query(
-        collection(db, "students"),
-        where("class", "==", data.class)
-      );
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
-        let data = doc.data();
-        array.push(data);
-      });
-    }
+    const q = query(
+      collection(db, "students"),
+      where("class", "==", data.class)
+    );
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      let data = doc.data();
+      array.push(data);
+    });
     if (array.length > 0) {
       dispatch({
         type: FETCH_STUDENT,
@@ -150,7 +134,42 @@ export const readClass = (data, setFetchLoader) => async (dispatch) => {
       );
     }
   } catch (error) {
+    window.notify(error.message, "error");
   } finally {
     setFetchLoader(false);
   }
 };
+export const readClassOnSubjects =
+  (data, setFetchLoader) => async (dispatch) => {
+    try {
+      setFetchLoader(true);
+      let array = [];
+      const q = query(
+        collection(db, "students"),
+        where("subjects", "==", data.subjects)
+      );
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        let data = doc.data();
+        array.push(data);
+      });
+      if (data.class === "9th" || data.class === "10th") {
+        array = array.filter((student) => student.class === data.class);
+      }
+      if (array.length > 0) {
+        dispatch({
+          type: FETCH_STUDENT,
+          payload: array,
+        });
+      } else {
+        window.notify(
+          `You have no students available in this class.Please add via clicking on the button 👈🏻`,
+          "info"
+        );
+      }
+    } catch (error) {
+      window.notify(error.message, "error");
+    } finally {
+      setFetchLoader(false);
+    }
+  };

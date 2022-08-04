@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import {
   readSingleStudent,
   readClass,
+  readClassOnSubjects,
 } from "./../../store/actions/studentAction";
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -13,20 +14,24 @@ const useStudents = () => {
   const formik = useFormik({
     initialValues: {
       class: "",
-      subjects: [],
+      subjects: "",
     },
     validationSchema: yup.object({
       class: yup.string().min(3).required("Required"),
     }),
     onSubmit: (values) => {
-      if (values.class !== "") {
+      if (values.class !== "" && values.subjects === "") {
         dispatch(readClass(values, setFetchLoader));
+      } else if (values.subjects !== "") {
+        dispatch(readClassOnSubjects(values, setFetchLoader));
       } else {
         window.notify(
           "Please! Select a class and relevant subjects to that class.",
           "warning"
         );
       }
+      values.class = "";
+      values.subjects = "";
     },
   });
   const fetchSingleStudent = (studentID) => {
