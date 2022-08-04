@@ -1,6 +1,12 @@
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { createStudent } from "../../store/actions/studentAction";
 const useAddStudents = () => {
+  const [buttonLoader, setButtonLoader] = useState(false);
+  const adminSignedIn = JSON.parse(localStorage.getItem("userCredentials"));
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -44,11 +50,20 @@ const useAddStudents = () => {
       class: yup.string().min(3).required("Required"),
     }),
     onSubmit: (values) => {
-      console.log(values);
+      values.name = values.name.trim();
+      values.FName = values.FName.trim();
+      values.address = values.address.trim();
+      values.city = values.city.trim();
+      values.gender = values.gender.trim();
+      values.class = values.class.trim();
+      values.email = `${values.rollNo}@gulbergbostonacademy.web.app`;
+      values.password = `0${values.rollNo}`;
+      values.role = "student";
+      dispatch(createStudent(values, setButtonLoader, adminSignedIn));
     },
   });
 
-  return { formik };
+  return { formik, buttonLoader };
 };
 
 export default useAddStudents;

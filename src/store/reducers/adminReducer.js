@@ -1,4 +1,5 @@
 import {
+  CREATE_ADMINS,
   DELETE_ADMINS,
   FETCH_ALL_ADMINS,
   UPDATE_ADMINS,
@@ -34,6 +35,16 @@ const adminReducer = (state = initialState, action) => {
           return item;
         }
       });
+      return {
+        ...state,
+        adminsList: newAdminsList,
+      };
+    }
+    case CREATE_ADMINS: {
+      let newAdminsList = [];
+      if (state.adminsList.length > 0) {
+        newAdminsList = state.adminsList.push(action.payload);
+      }
       return {
         ...state,
         adminsList: newAdminsList,

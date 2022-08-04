@@ -2,8 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import useAddStudents from "./useAddStudents";
 import { AiOutlineCloseCircle } from "react-icons/ai";
+import ButtonLoader from "./../../components/buttonLoader/ButtonLoader";
 const AddStudent = () => {
-  const { formik } = useAddStudents();
+  const { formik, buttonLoader } = useAddStudents();
 
   return (
     <div className="container">
@@ -418,8 +419,9 @@ const AddStudent = () => {
               <button
                 type="submit"
                 className="btn btn-outline-dark px-5 fw-bold"
+                disabled={buttonLoader}
               >
-                Register
+                {buttonLoader ? <ButtonLoader size={13.5} /> : "Register"}
               </button>
             </div>
           </form>

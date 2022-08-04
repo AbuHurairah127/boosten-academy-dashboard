@@ -11,6 +11,7 @@ import {
   LOGOUT,
   DELETE_ADMINS,
   UPDATE_ADMINS,
+  CREATE_ADMINS,
 } from "../types/constants";
 import {
   doc,
@@ -68,8 +69,18 @@ export const addAdmin =
         });
       } catch (error) {
         window.notify(error.message, "error");
-      } finally {
       }
+      dispatch({
+        type: CREATE_ADMINS,
+        payload: {
+          name: data.name,
+          fatherName: data.fatherName,
+          address: data.address,
+          uid: userData.uid,
+          email: data.email,
+          role: data.role,
+        },
+      });
       window.notify("New admin has been created.", "success");
     } catch (error) {
       const errorMessage = error.message;
