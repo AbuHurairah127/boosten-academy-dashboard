@@ -112,7 +112,7 @@ export const readClass = (data, setFetchLoader) => async (dispatch) => {
   try {
     setFetchLoader(true);
     let array = [];
-    if (data.class !== "" && data.subject > 0) {
+    if (data.class !== "" && data.subject !== "") {
       console.log("if");
       const q = query(
         collection(db, "students"),
