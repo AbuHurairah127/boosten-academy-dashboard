@@ -112,17 +112,8 @@ export const readClass = (data, setFetchLoader) => async (dispatch) => {
   try {
     setFetchLoader(true);
     let array = [];
-    if (!(data.class !== "" && data.subject > 0)) {
-      const q = query(
-        collection(db, "students"),
-        where("class", "==", data.class)
-      );
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
-        let data = doc.data();
-        array.push(data);
-      });
-    } else {
+    if (data.class !== "" && data.subject > 0) {
+      console.log("if");
       const q = query(
         collection(db, "students"),
         where("subjects", "==", data.subjects)
@@ -135,6 +126,17 @@ export const readClass = (data, setFetchLoader) => async (dispatch) => {
       if (data.class === "9th" || data.class === "10th") {
         array = array.filter((student) => student.class === data.class);
       }
+    } else {
+      console.log("else");
+      const q = query(
+        collection(db, "students"),
+        where("class", "==", data.class)
+      );
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        let data = doc.data();
+        array.push(data);
+      });
     }
     if (array.length > 0) {
       dispatch({
