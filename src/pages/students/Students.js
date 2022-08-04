@@ -13,6 +13,7 @@ const Students = () => {
     setFetchStudentRollNo,
     fetchLoader,
     fetchSingleStudent,
+    formik,
   } = useStudents();
   return (
     <div className="d-flex flex-column studentsContainer">
@@ -97,7 +98,6 @@ const Students = () => {
                     </tr>
                   );
                 })}
-                ;
               </tbody>
             </table>
           ) : (
@@ -113,42 +113,242 @@ const Students = () => {
             </div>
           )}
           <>
-            <div
-              className="modal fade"
-              id="exampleModalToggle"
-              aria-hidden="true"
-              aria-labelledby="exampleModalToggleLabel"
-              tabIndex={-1}
-            >
-              <div className="modal-dialog modal-dialog-centered">
-                <div className="modal-content">
-                  <div className="modal-header">
-                    <h5 className="modal-title" id="exampleModalToggleLabel">
-                      Fetch Full Class
-                    </h5>
-                    <button
-                      type="button"
-                      className="btn-close"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    />
-                  </div>
-                  <div className="modal-body">
-                    Show a second modal and hide this one with the button below.
-                  </div>
-                  <div className="modal-footer">
-                    <button
-                      className="btn btn-outline-dark"
-                      data-bs-target="#exampleModalToggle2"
-                      data-bs-toggle="modal"
-                    >
-                      To Fetch Single Student
-                    </button>
-                    <button className="btn btn-dark">Fetch Class</button>
+            <form onSubmit={formik.handleSubmit}>
+              <div
+                className="modal fade"
+                id="exampleModalToggle"
+                aria-hidden="true"
+                aria-labelledby="exampleModalToggleLabel"
+                tabIndex={-1}
+              >
+                <div className="modal-dialog modal-dialog-centered">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title" id="exampleModalToggleLabel">
+                        Fetch Full Class
+                      </h5>
+                      <button
+                        type="button"
+                        className="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      />
+                    </div>
+                    <div className="modal-body">
+                      <div className="col-md-11 m-auto">
+                        <label htmlFor="class" className="form-label">
+                          Class
+                        </label>
+                        <select
+                          id="class"
+                          className="form-select"
+                          name="class"
+                          onChange={formik.handleChange}
+                          title="Student's Class(Select the student's class from the list)"
+                          required
+                        >
+                          <option value="">Choose Class</option>
+                          <option value="9th">9th</option>
+                          <option value="10th">10th</option>
+                          <option value="1st-year">11th</option>
+                          <option value="2nd-year">12th</option>
+                        </select>{" "}
+                        {formik.errors.class && (
+                          <div className="text-center fw-bold text-danger">
+                            {formik.errors.class}
+                          </div>
+                        )}
+                      </div>
+                      <div className="col-md-11 m-auto">
+                        <label htmlFor="subjects" className="form-label">
+                          Subjects
+                        </label>
+                        <select
+                          id="inputState"
+                          className="form-select"
+                          name="subjects"
+                          onChange={formik.handleChange}
+                          title="Student's Class(Select the student's class from the list)"
+                        >
+                          <option value="">Choose Subjects</option>
+                          {/* Subjects for 9th Class */}
+                          {formik.values.class === "9th" && (
+                            <>
+                              <option
+                                value={[
+                                  "English",
+                                  "Urdu",
+                                  "Maths",
+                                  "IS",
+                                  "PS",
+                                  "Physics",
+                                  "Chemistry",
+                                  "Biology",
+                                ]}
+                              >
+                                Biology Group
+                              </option>
+                              <option
+                                value={[
+                                  "English",
+                                  "Urdu",
+                                  "Maths",
+                                  "IS",
+                                  "PS",
+                                  "Physics",
+                                  "Chemistry",
+                                  "Computer",
+                                ]}
+                              >
+                                Computer Group
+                              </option>
+                            </>
+                          )}
+                          {/* Subjects for 10th Class */}
+                          {formik.values.class === "10th" && (
+                            <>
+                              <option
+                                value={[
+                                  "English",
+                                  "Urdu",
+                                  "Maths",
+                                  "IS",
+                                  "PS",
+                                  "Physics",
+                                  "Chemistry",
+                                  "Biology",
+                                ]}
+                              >
+                                Biology Group
+                              </option>
+                              <option
+                                value={[
+                                  "English",
+                                  "Urdu",
+                                  "Maths",
+                                  "IS",
+                                  "PS",
+                                  "Physics",
+                                  "Chemistry",
+                                  "Computer",
+                                ]}
+                              >
+                                Computer Group
+                              </option>
+                            </>
+                          )}
+                          {/* Subjects for 1st Year */}
+                          {formik.values.class === "1st-year" && (
+                            <>
+                              <option
+                                value={[
+                                  "English",
+                                  "Urdu",
+                                  "Physics",
+                                  "Chemistry",
+                                  "IS",
+                                  "Biology",
+                                ]}
+                              >
+                                FSc(Pre-Medical)
+                              </option>
+                              <option
+                                value={[
+                                  "English",
+                                  "Urdu",
+                                  "Physics",
+                                  "Chemistry",
+                                  "IS",
+                                  "Maths",
+                                ]}
+                              >
+                                FSc(Pre-Engineering)
+                              </option>
+                              <option
+                                value={[
+                                  "English",
+                                  "Urdu",
+                                  "Physics",
+                                  "Computer",
+                                  "IS",
+                                  "Maths",
+                                ]}
+                              >
+                                ICS
+                              </option>
+                              <option value="I.com">I.Com</option>
+                            </>
+                          )}
+                          {/* Subjects for 2nd Year */}
+                          {formik.values.class === "2nd-year" && (
+                            <>
+                              <option
+                                value={[
+                                  "English",
+                                  "Urdu",
+                                  "Physics",
+                                  "Chemistry",
+                                  "PS",
+                                  "Biology",
+                                ]}
+                              >
+                                FSc(Pre-Medical)
+                              </option>
+                              <option
+                                value={[
+                                  "English",
+                                  "Urdu",
+                                  "Physics",
+                                  "Chemistry",
+                                  "PS",
+                                  "Maths",
+                                ]}
+                              >
+                                FSc(Pre-Engineering)
+                              </option>
+                              <option
+                                value={[
+                                  "English",
+                                  "Urdu",
+                                  "Physics",
+                                  "Computer",
+                                  "PS",
+                                  "Maths",
+                                ]}
+                              >
+                                ICS
+                              </option>
+                              <option value="I.com">I.Com</option>
+                            </>
+                          )}
+                        </select>{" "}
+                        {formik.errors.subjects && (
+                          <div className="text-center fw-bold text-danger">
+                            {formik.errors.subjects}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                    <div className="modal-footer">
+                      <button
+                        className="btn btn-outline-dark"
+                        data-bs-target="#exampleModalToggle2"
+                        data-bs-toggle="modal"
+                      >
+                        To Fetch Single Student
+                      </button>
+                      <button
+                        className="btn btn-dark"
+                        type="submit"
+                        data-bs-dismiss={formik.values.class !== "" && "modal"}
+                      >
+                        Fetch Class
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </form>
             <div
               className="modal fade"
               id="exampleModalToggle2"

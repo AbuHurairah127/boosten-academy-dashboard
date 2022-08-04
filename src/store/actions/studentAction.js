@@ -14,7 +14,7 @@ import {
   query,
   collection,
 } from "firebase/firestore/lite";
-import { LOGIN, LOGOUT, FETCH_SINGLE_STUDENT } from "../types/constants";
+import { LOGIN, LOGOUT, FETCH_STUDENT } from "../types/constants";
 export const createStudent =
   (data, setButtonLoader, adminSignedIn) => async (dispatch) => {
     try {
@@ -93,12 +93,12 @@ export const readSingleStudent =
       });
       if (array.length > 0) {
         dispatch({
-          type: FETCH_SINGLE_STUDENT,
+          type: FETCH_STUDENT,
           payload: array,
         });
       } else {
         window.notify(
-          `You have no students available for this Student Id "${studentId}".Please add via clicking on the button 👈🏻`,
+          `You have no students available corresponding to Student Id "${studentId}".Please add via clicking on the button 👈🏻`,
           "info"
         );
       }
@@ -108,3 +108,47 @@ export const readSingleStudent =
       setFetchLoader(false);
     }
   };
+export const readClass = (data, setFetchLoader) => async (dispatch) => {
+  try {
+    setFetchLoader(true);
+    let array = [];
+    if (!(data.class !== "" && data.subject > 0)) {
+      const q = query(
+        collection(db, "students"),
+        where("class", "==", data.class)
+      );
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        let data = doc.data();
+        array.push(data);
+      });
+    } else {
+      const q = query(
+        collection(db, "students"),
+        where("subjects", "==", data.subjects)
+      );
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        let data = doc.data();
+        array.push(data);
+      });
+      if (data.class === "9th" || data.class === "10th") {
+        array = array.filter((student) => student.class === data.class);
+      }
+    }
+    if (array.length > 0) {
+      dispatch({
+        type: FETCH_STUDENT,
+        payload: array,
+      });
+    } else {
+      window.notify(
+        `You have no students available in this class.Please add via clicking on the button 👈🏻`,
+        "info"
+      );
+    }
+  } catch (error) {
+  } finally {
+    setFetchLoader(false);
+  }
+};
