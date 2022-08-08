@@ -36,6 +36,7 @@ export const createStudent =
       try {
         await setDoc(doc(db, "students", userData.uid), {
           email: data.email,
+          password: data.password,
           name: data.name,
           fatherName: data.FName,
           rollNo: data.rollNo,

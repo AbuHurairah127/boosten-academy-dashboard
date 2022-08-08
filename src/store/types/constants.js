@@ -12,3 +12,5 @@ export const CREATE_STUDENTS = "CREATE_STUDENTS";
 export const DELETE_STUDENTS = "DELETE_STUDENTS";
 export const UPDATE_STUDENTS = "UPDATE_STUDENTS";
 export const FETCH_STUDENT = "FETCH_SINGLE_STUDENT";
+//atendance Constants
+export const FETCH_CLASS = "FETCH_CLASS";

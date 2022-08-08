@@ -85,7 +85,17 @@ const Students = () => {
                       <td className="text-center">{item.fatherName}</td>
                       <td className="text-center">{item.rollNo}</td>
                       <td className="text-center">{item.class}</td>
-                      <td className="text-center">{item.gender}</td>
+                      <td className="text-center">
+                        {item.gender === "Male" ? (
+                          <span className="btn btn-danger text-white btn-sm rounded-pill">
+                            {item.gender}
+                          </span>
+                        ) : (
+                          <span className="btn btn-primary btn-sm rounded-pill">
+                            {item.gender}
+                          </span>
+                        )}
+                      </td>
 
                       <td className="text-center">
                         <button

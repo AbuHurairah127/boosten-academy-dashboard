@@ -26,7 +26,7 @@ const App = () => {
           dispatch(fetchUser(setPreLoader, userCredentials));
         }
       } catch (error) {
-        window.notify("err", "error");
+        window.notify(error.message, "error");
       } finally {
         setTimeout(() => {
           setPreLoader(false);

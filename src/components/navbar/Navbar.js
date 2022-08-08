@@ -68,6 +68,11 @@ const Navbar = () => {
                     Add Marks
                   </Link>
                 </li>
+                <li>
+                  <Link className="dropdown-item" to="/mark-attendance">
+                    Mark Attendance
+                  </Link>
+                </li>
 
                 {userRole === "superAdmin" && (
                   <>

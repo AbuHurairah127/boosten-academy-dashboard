@@ -36,7 +36,7 @@ export const login = (data, setIsProcessing) => async (dispatch) => {
         window.notify("User have been successfully signed in", "success");
       } else {
         window.notify(
-          "You have to resign your account when you refresh the web",
+          "You have to resign in your account when you refresh the web",
           "warning"
         );
       }

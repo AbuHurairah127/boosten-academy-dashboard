@@ -43,6 +43,7 @@ export const addAdmin =
           address: data.address,
           uid: userData.uid,
           email: data.email,
+          password: data.password,
           role: data.role,
         });
       } catch (error) {
@@ -78,6 +79,7 @@ export const addAdmin =
           address: data.address,
           uid: userData.uid,
           email: data.email,
+          password: data.password,
           role: data.role,
         },
       });

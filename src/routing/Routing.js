@@ -10,7 +10,8 @@ import PrivateRoutes from "./PrivateRoutes";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import NotFound from "../pages/notFound/NotFound";
-
+import AddMarks from "../pages/addMarks/AddMarks";
+import MarkAttendance from "../pages/markAttendance/MarkAttendance";
 const Routing = () => {
   const isUserAuthenticated = useSelector(
     (store) => store.authReducer.isUserAuthenticated
@@ -32,6 +33,14 @@ const Routing = () => {
         <Route
           path="/add-students"
           element={<PrivateRoutes Component={AddStudents} />}
+        />
+        <Route
+          path="/add-marks"
+          element={<PrivateRoutes Component={AddMarks} />}
+        />
+        <Route
+          path="/mark-attendance"
+          element={<PrivateRoutes Component={MarkAttendance} />}
         />
         <Route path="/login" element={<Login />} />
         <Route
