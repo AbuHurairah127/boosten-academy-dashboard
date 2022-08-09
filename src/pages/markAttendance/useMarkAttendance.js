@@ -9,7 +9,7 @@ const useMarkAttendance = () => {
   const [fetchLoader, setFetchLoader] = useState(false);
   const [buttonLoader, setButtonLoader] = useState(false);
   const students = useSelector((store) => store.attendanceReducer.studentsList);
-  const [today, setToday] = useState(null);
+  const [today, setToday] = useState(new Date());
   const [studentList, setStudentList] = useState([]);
   useEffect(() => {
     setStudentList(students);
@@ -49,7 +49,15 @@ const useMarkAttendance = () => {
     }
   };
   const uploadAttendance = () => {
-    dispatch(createAttendance(studentList, setButtonLoader));
+    let studentsAttendanceList = studentList.map((student) => {
+      return {
+        attendanceStatus: student.isPresent,
+        attendanceDate: today,
+        studentId: student.rollNo,
+      };
+    });
+
+    dispatch(createAttendance(studentsAttendanceList, setButtonLoader));
   };
 
   return {

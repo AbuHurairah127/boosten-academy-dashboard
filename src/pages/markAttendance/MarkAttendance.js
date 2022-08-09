@@ -3,11 +3,9 @@ import Footer from "../../components/footer/Footer";
 import Navbar from "../../components/navbar/Navbar";
 import useMarkAttendance from "./useMarkAttendance";
 import ButtonLoader from "../../components/buttonLoader/ButtonLoader";
-import { AiFillCheckCircle } from "react-icons/ai";
 const MarkAttendance = () => {
   const {
     fetchLoader,
-    students,
     setToday,
     fetchStudents,
     onChangeHandler,
@@ -39,7 +37,7 @@ const MarkAttendance = () => {
               <h1 className="display-3">Mark Attendance</h1>
               <div className="row d-flex justify-content-evenly ">
                 <div className="card col-5 d-flex flex-row p-2">
-                  <div className="col-10">
+                  <div className="col-12">
                     <label htmlFor="date" className="p-0 fs-5">
                       Select Date
                     </label>
@@ -49,16 +47,6 @@ const MarkAttendance = () => {
                       onChange={(e) => setToday(e.target.value)}
                       id="date"
                     />
-                  </div>
-                  <div className="col-2 align-self-end">
-                    <button
-                      className="btn btn-primary"
-                      onClick={(e) => {
-                        setToday(e.target.value);
-                      }}
-                    >
-                      <AiFillCheckCircle size={21} />
-                    </button>
                   </div>
                 </div>
                 <div className="card col-5 mx-3 d-flex flex-row justify-content-center align-items-end p-2">
