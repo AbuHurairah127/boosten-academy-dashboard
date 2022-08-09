@@ -1,14 +1,7 @@
 import { db } from "../../config/firebase";
-import {
-  collection,
-  where,
-  getDocs,
-  query,
-  orderBy,
-  limit,
-} from "firebase/firestore/lite";
+import { collection, getDocs, query, orderBy } from "firebase/firestore/lite";
 import { FETCH_CLASS } from "../types/constants";
-export const readClassOnSubjects = (setFetchLoader) => async (dispatch) => {
+export const readAllStudents = (setFetchLoader) => async (dispatch) => {
   try {
     setFetchLoader(true);
     let array = [];
@@ -42,5 +35,19 @@ export const readClassOnSubjects = (setFetchLoader) => async (dispatch) => {
     window.notify(error.message, "error");
   } finally {
     setFetchLoader(false);
+  }
+};
+export const createAttendance = (data, setButtonLoader) => async (dispatch) => {
+  try {
+    setButtonLoader(true);
+    console.log(data);
+    window.notify(
+      "Attendance has been successfully updated on the portal.",
+      "success"
+    );
+  } catch (error) {
+    window.notify(error.message, "error");
+  } finally {
+    setButtonLoader(false);
   }
 };

@@ -8,11 +8,14 @@ const MarkAttendance = () => {
   const {
     fetchLoader,
     students,
-    attendance,
-    today,
-    onDateChangeHandler,
     setToday,
     fetchStudents,
+    onChangeHandler,
+    markAllAsPresent,
+    studentList,
+    markAllAsAbsent,
+    buttonLoader,
+    uploadAttendance,
   } = useMarkAttendance();
 
   return (
@@ -31,40 +34,52 @@ const MarkAttendance = () => {
             >
               <ButtonLoader />
             </div>
-          ) : students.length > 0 ? (
+          ) : studentList.length > 0 ? (
             <div className="container">
               <h1 className="display-3">Mark Attendance</h1>
-              <div className="row d-flex">
-                <div className="col-5">
-                  <label htmlFor="date" className=" fs-5">
-                    Select Date
-                  </label>
-                  <input
-                    type="date"
-                    className="form-control"
-                    onChange={(e) => setToday(e.target.value)}
-                    id="date"
-                  />
+              <div className="row d-flex justify-content-evenly ">
+                <div className="card col-5 d-flex flex-row p-2">
+                  <div className="col-10">
+                    <label htmlFor="date" className="p-0 fs-5">
+                      Select Date
+                    </label>
+                    <input
+                      type="date"
+                      className="form-control"
+                      onChange={(e) => setToday(e.target.value)}
+                      id="date"
+                    />
+                  </div>
+                  <div className="col-2 align-self-end">
+                    <button
+                      className="btn btn-primary"
+                      onClick={(e) => {
+                        setToday(e.target.value);
+                      }}
+                    >
+                      <AiFillCheckCircle size={21} />
+                    </button>
+                  </div>
                 </div>
-                <div className="col-1 align-self-end">
-                  <button
-                    className="btn btn-primary"
-                    onClick={(e) => {
-                      setToday(e.target.value);
-                    }}
-                  >
-                    <AiFillCheckCircle size={21} />
-                  </button>
-                </div>
-                <div className="col-3 align-self-end">
-                  <button className="btn btn-primary" type="button">
-                    Mark All as Present
-                  </button>
-                </div>
-                <div className="col-3 align-self-end">
-                  <button className="btn btn-primary" type="button">
-                    Mark All as Absent
-                  </button>
+                <div className="card col-5 mx-3 d-flex flex-row justify-content-center align-items-end p-2">
+                  <div className="col-6">
+                    <button
+                      className="btn btn-primary"
+                      type="button"
+                      onClick={markAllAsPresent}
+                    >
+                      Mark All as Present
+                    </button>
+                  </div>
+                  <div className="col-6">
+                    <button
+                      className="btn btn-primary"
+                      type="button"
+                      onClick={markAllAsAbsent}
+                    >
+                      Mark All as Absent
+                    </button>
+                  </div>
                 </div>
               </div>
               <table className="table">
@@ -89,7 +104,7 @@ const MarkAttendance = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {students.map((item, index) => {
+                  {studentList.map((item, index) => {
                     return (
                       <tr key={index}>
                         <td className="text-center">{index + 1}</td>
@@ -97,40 +112,23 @@ const MarkAttendance = () => {
                         <td className="text-center">{item.fatherName}</td>
                         <td className="text-center">{item.rollNo}</td>
                         <td className="text-center">
-                          <div className="d-flex justify-content-center">
-                            <div className="form-check d-flex align-items-center justify-center">
-                              <div className="form-check">
-                                <input
-                                  className="form-check-input"
-                                  type="radio"
-                                  name="attendance"
-                                  id="present"
-                                  value="present"
-                                />
-                                <label
-                                  className="form-check-label"
-                                  htmlFor="present"
-                                >
-                                  Present
-                                </label>
-                              </div>
-                            </div>
-                            <div className="form-check d-flex align-items-center justify-center">
-                              <div className="form-check">
-                                <input
-                                  className="form-check-input"
-                                  type="radio"
-                                  name="attendance"
-                                  id="absent"
-                                  value="absent"
-                                />
-                                <label
-                                  className="form-check-label"
-                                  htmlFor="absent"
-                                >
-                                  Absent
-                                </label>
-                              </div>
+                          <div className="form-check d-flex align-items-center justify-center">
+                            <div className="form-check">
+                              <input
+                                className="form-check-input"
+                                type="checkbox"
+                                checked={item?.isPresent || false}
+                                onChange={(e) =>
+                                  onChangeHandler(e, item.rollNo)
+                                }
+                                id={item.rollNo}
+                              />
+                              <label
+                                className="form-check-label"
+                                htmlFor={item.rollNo}
+                              >
+                                Present
+                              </label>
                             </div>
                           </div>
                         </td>
@@ -139,6 +137,25 @@ const MarkAttendance = () => {
                   })}
                 </tbody>
               </table>
+              <div className="row">
+                <div className="col my-3">
+                  {buttonLoader ? (
+                    <button
+                      className="btn btn-primary px-3"
+                      disabled={buttonLoader}
+                    >
+                      <ButtonLoader color={"white"} size={13} />
+                    </button>
+                  ) : (
+                    <button
+                      className="btn btn-outline-primary"
+                      onClick={uploadAttendance}
+                    >
+                      Submit Attendance
+                    </button>
+                  )}
+                </div>
+              </div>
             </div>
           ) : (
             <div className="col text-center my-4">
@@ -156,7 +173,6 @@ const MarkAttendance = () => {
       <footer className="mt-auto">
         <Footer />
       </footer>
-      {/* Modal Code */}
     </div>
   );
 };
