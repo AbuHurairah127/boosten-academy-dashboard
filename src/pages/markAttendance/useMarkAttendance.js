@@ -53,7 +53,7 @@ const useMarkAttendance = () => {
       return {
         attendanceStatus: student.isPresent,
         attendanceDate: today,
-        studentId: student.rollNo,
+        studentId: student.uid,
       };
     });
 

@@ -1,5 +1,12 @@
 import { db } from "../../config/firebase";
-import { collection, getDocs, query, orderBy } from "firebase/firestore/lite";
+import {
+  collection,
+  getDocs,
+  query,
+  orderBy,
+  doc,
+  addDoc,
+} from "firebase/firestore/lite";
 import { FETCH_CLASS } from "../types/constants";
 export const readAllStudents = (setFetchLoader) => async (dispatch) => {
   try {
@@ -40,13 +47,17 @@ export const readAllStudents = (setFetchLoader) => async (dispatch) => {
 export const createAttendance = (data, setButtonLoader) => async (dispatch) => {
   try {
     setButtonLoader(true);
-    console.log(data);
+    await data.map((todayAttendance) => {
+      addDoc(collection(db, "attendance"), todayAttendance);
+    });
     window.notify(
       "Attendance has been successfully updated on the portal.",
       "success"
     );
   } catch (error) {
     window.notify(error.message, "error");
+
+    console.log(error.message);
   } finally {
     setButtonLoader(false);
   }
