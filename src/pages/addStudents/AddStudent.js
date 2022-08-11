@@ -261,7 +261,7 @@ const AddStudent = () => {
                 {formik.values.class === "9th" && (
                   <>
                     <option
-                      value={[
+                      value='[
                         "English",
                         "Urdu",
                         "Maths",
@@ -269,13 +269,13 @@ const AddStudent = () => {
                         "PS",
                         "Physics",
                         "Chemistry",
-                        "Biology",
-                      ]}
+                        "Biology"
+                      ]'
                     >
                       Biology Group
                     </option>
                     <option
-                      value={[
+                      value='[
                         "English",
                         "Urdu",
                         "Maths",
@@ -283,8 +283,8 @@ const AddStudent = () => {
                         "PS",
                         "Physics",
                         "Chemistry",
-                        "Computer",
-                      ]}
+                        "Computer"
+                      ]'
                     >
                       Computer Group
                     </option>
@@ -294,7 +294,7 @@ const AddStudent = () => {
                 {formik.values.class === "10th" && (
                   <>
                     <option
-                      value={[
+                      value='[
                         "English",
                         "Urdu",
                         "Maths",
@@ -302,13 +302,13 @@ const AddStudent = () => {
                         "PS",
                         "Physics",
                         "Chemistry",
-                        "Biology",
-                      ]}
+                        "Biology"
+                      ]'
                     >
                       Biology Group
                     </option>
                     <option
-                      value={[
+                      value='[
                         "English",
                         "Urdu",
                         "Maths",
@@ -316,8 +316,8 @@ const AddStudent = () => {
                         "PS",
                         "Physics",
                         "Chemistry",
-                        "Computer",
-                      ]}
+                        "Computer"
+                      ]'
                     >
                       Computer Group
                     </option>
@@ -327,38 +327,38 @@ const AddStudent = () => {
                 {formik.values.class === "1st-year" && (
                   <>
                     <option
-                      value={[
+                      value='[
                         "English",
                         "Urdu",
                         "Physics",
                         "Chemistry",
                         "IS",
-                        "Biology",
-                      ]}
+                        "Biology"
+                      ]'
                     >
                       FSc(Pre-Medical)
                     </option>
                     <option
-                      value={[
+                      value='[
                         "English",
                         "Urdu",
                         "Physics",
                         "Chemistry",
                         "IS",
-                        "Maths",
-                      ]}
+                        "Maths"
+                      ]'
                     >
                       FSc(Pre-Engineering)
                     </option>
                     <option
-                      value={[
+                      value='[
                         "English",
                         "Urdu",
                         "Physics",
                         "Computer",
                         "IS",
-                        "Maths",
-                      ]}
+                        "Maths"
+                      ]'
                     >
                       ICS
                     </option>
@@ -369,38 +369,38 @@ const AddStudent = () => {
                 {formik.values.class === "2nd-year" && (
                   <>
                     <option
-                      value={[
+                      value='[
                         "English",
                         "Urdu",
                         "Physics",
                         "Chemistry",
                         "PS",
-                        "Biology",
-                      ]}
+                        "Biology"
+                      ]'
                     >
                       FSc(Pre-Medical)
                     </option>
                     <option
-                      value={[
+                      value='[
                         "English",
                         "Urdu",
                         "Physics",
                         "Chemistry",
                         "PS",
-                        "Maths",
-                      ]}
+                        "Maths"
+                      ]'
                     >
                       FSc(Pre-Engineering)
                     </option>
                     <option
-                      value={[
+                      value='[
                         "English",
                         "Urdu",
                         "Physics",
                         "Computer",
                         "PS",
-                        "Maths",
-                      ]}
+                        "Maths"
+                      ]'
                     >
                       ICS
                     </option>

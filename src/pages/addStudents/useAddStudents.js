@@ -19,7 +19,7 @@ const useAddStudents = () => {
       city: "",
       gender: "",
       class: "",
-      subjects: [],
+      subjects: "",
     },
     validationSchema: yup.object({
       name: yup

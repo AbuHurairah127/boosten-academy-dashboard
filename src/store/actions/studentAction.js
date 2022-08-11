@@ -111,6 +111,7 @@ export const readSingleStudent =
       }
     } catch (error) {
       window.notify(error.message, "error");
+      console.log(error.message);
     } finally {
       setFetchLoader(false);
     }
