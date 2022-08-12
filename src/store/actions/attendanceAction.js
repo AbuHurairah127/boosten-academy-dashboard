@@ -4,10 +4,9 @@ import {
   getDocs,
   query,
   orderBy,
-  doc,
   addDoc,
 } from "firebase/firestore/lite";
-import { FETCH_CLASS } from "../types/constants";
+import { FETCH_ACADEMY } from "../types/constants";
 export const readAllStudents = (setFetchLoader) => async (dispatch) => {
   try {
     setFetchLoader(true);
@@ -29,7 +28,7 @@ export const readAllStudents = (setFetchLoader) => async (dispatch) => {
 
     if (array.length > 0) {
       dispatch({
-        type: FETCH_CLASS,
+        type: FETCH_ACADEMY,
         payload: array,
       });
     } else {

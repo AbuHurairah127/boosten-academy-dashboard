@@ -64,7 +64,7 @@ const Navbar = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link className="dropdown-item" to="add-marks">
+                  <Link className="dropdown-item" to="/add-marks">
                     Add Marks
                   </Link>
                 </li>

@@ -18,7 +18,6 @@ const Students = () => {
     onDeleteHandler,
     buttonLoader,
   } = useStudents();
-
   return (
     <div className="d-flex flex-column studentsContainer">
       <Navbar />
@@ -86,7 +85,6 @@ const Students = () => {
                       <td className="text-center">{item.fatherName}</td>
                       <td className="text-center">{item.rollNo}</td>
                       <td className="text-center">{item.class}</td>
-                      <td className="text-center">{item.subjects}</td>
                       <td className="text-center">
                         {item.gender === "Male" ? (
                           <span className="btn btn-danger text-white btn-sm rounded-pill">

@@ -1,4 +1,4 @@
-import { FETCH_CLASS } from "../types/constants";
+import { FETCH_ACADEMY } from "../types/constants";
 
 let initialState = {
   studentsList: [],
@@ -6,7 +6,7 @@ let initialState = {
 
 const attendanceReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_CLASS: {
+    case FETCH_ACADEMY: {
       let newStudentsList = action.payload;
       return {
         ...state,
