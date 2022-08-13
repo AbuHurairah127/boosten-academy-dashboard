@@ -49,15 +49,19 @@ const useMarkAttendance = () => {
     }
   };
   const uploadAttendance = () => {
-    let studentsAttendanceList = studentList.map((student) => {
-      return {
-        attendanceStatus: student.isPresent,
-        attendanceDate: today,
-        studentId: student.uid,
-      };
-    });
+    if (today !== null) {
+      let studentsAttendanceList = studentList.map((student) => {
+        return {
+          attendanceStatus: student.isPresent,
+          attendanceDate: today,
+          studentId: student.uid,
+        };
+      });
 
-    dispatch(createAttendance(studentsAttendanceList, setButtonLoader));
+      dispatch(createAttendance(studentsAttendanceList, setButtonLoader));
+    } else {
+      window.notify("Please select the date first.", "error");
+    }
   };
 
   return {

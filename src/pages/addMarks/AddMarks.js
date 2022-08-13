@@ -43,7 +43,7 @@ const AddMarks = () => {
                   aria-label="Close"
                 />
               </div>
-              <form onSubmit={formik.handleSubmit}>
+              <form onSubmit={formik.handleSubmit} onReset={formik.handleReset}>
                 <div className="modal-body">
                   <div className="col-md-11 m-auto">
                     <label htmlFor="class" className="form-label">
@@ -86,30 +86,30 @@ const AddMarks = () => {
                       {formik.values.class === "9th" && (
                         <>
                           <option
-                            value={[
-                              "English",
-                              "Urdu",
-                              "Maths",
-                              "IS",
-                              "PS",
-                              "Physics",
-                              "Chemistry",
-                              "Biology",
-                            ]}
+                            value='[
+                        "English",
+                        "Urdu",
+                        "Maths",
+                        "IS",
+                        "PS",
+                        "Physics",
+                        "Chemistry",
+                        "Biology"
+                      ]'
                           >
                             Biology Group
                           </option>
                           <option
-                            value={[
-                              "English",
-                              "Urdu",
-                              "Maths",
-                              "IS",
-                              "PS",
-                              "Physics",
-                              "Chemistry",
-                              "Computer",
-                            ]}
+                            value='[
+                        "English",
+                        "Urdu",
+                        "Maths",
+                        "IS",
+                        "PS",
+                        "Physics",
+                        "Chemistry",
+                        "Computer"
+                      ]'
                           >
                             Computer Group
                           </option>
@@ -119,30 +119,30 @@ const AddMarks = () => {
                       {formik.values.class === "10th" && (
                         <>
                           <option
-                            value={[
-                              "English",
-                              "Urdu",
-                              "Maths",
-                              "IS",
-                              "PS",
-                              "Physics",
-                              "Chemistry",
-                              "Biology",
-                            ]}
+                            value='[
+                        "English",
+                        "Urdu",
+                        "Maths",
+                        "IS",
+                        "PS",
+                        "Physics",
+                        "Chemistry",
+                        "Biology"
+                      ]'
                           >
                             Biology Group
                           </option>
                           <option
-                            value={[
-                              "English",
-                              "Urdu",
-                              "Maths",
-                              "IS",
-                              "PS",
-                              "Physics",
-                              "Chemistry",
-                              "Computer",
-                            ]}
+                            value='[
+                        "English",
+                        "Urdu",
+                        "Maths",
+                        "IS",
+                        "PS",
+                        "Physics",
+                        "Chemistry",
+                        "Computer"
+                      ]'
                           >
                             Computer Group
                           </option>
@@ -152,38 +152,38 @@ const AddMarks = () => {
                       {formik.values.class === "1st-year" && (
                         <>
                           <option
-                            value={[
-                              "English",
-                              "Urdu",
-                              "Physics",
-                              "Chemistry",
-                              "IS",
-                              "Biology",
-                            ]}
+                            value='[
+                        "English",
+                        "Urdu",
+                        "Physics",
+                        "Chemistry",
+                        "IS",
+                        "Biology"
+                      ]'
                           >
                             FSc(Pre-Medical)
                           </option>
                           <option
-                            value={[
-                              "English",
-                              "Urdu",
-                              "Physics",
-                              "Chemistry",
-                              "IS",
-                              "Maths",
-                            ]}
+                            value='[
+                        "English",
+                        "Urdu",
+                        "Physics",
+                        "Chemistry",
+                        "IS",
+                        "Maths"
+                      ]'
                           >
                             FSc(Pre-Engineering)
                           </option>
                           <option
-                            value={[
-                              "English",
-                              "Urdu",
-                              "Physics",
-                              "Computer",
-                              "IS",
-                              "Maths",
-                            ]}
+                            value='[
+                        "English",
+                        "Urdu",
+                        "Physics",
+                        "Computer",
+                        "IS",
+                        "Maths"
+                      ]'
                           >
                             ICS
                           </option>
@@ -194,45 +194,45 @@ const AddMarks = () => {
                       {formik.values.class === "2nd-year" && (
                         <>
                           <option
-                            value={[
-                              "English",
-                              "Urdu",
-                              "Physics",
-                              "Chemistry",
-                              "PS",
-                              "Biology",
-                            ]}
+                            value='[
+                        "English",
+                        "Urdu",
+                        "Physics",
+                        "Chemistry",
+                        "PS",
+                        "Biology"
+                      ]'
                           >
                             FSc(Pre-Medical)
                           </option>
                           <option
-                            value={[
-                              "English",
-                              "Urdu",
-                              "Physics",
-                              "Chemistry",
-                              "PS",
-                              "Maths",
-                            ]}
+                            value='[
+                        "English",
+                        "Urdu",
+                        "Physics",
+                        "Chemistry",
+                        "PS",
+                        "Maths"
+                      ]'
                           >
                             FSc(Pre-Engineering)
                           </option>
                           <option
-                            value={[
-                              "English",
-                              "Urdu",
-                              "Physics",
-                              "Computer",
-                              "PS",
-                              "Maths",
-                            ]}
+                            value='[
+                        "English",
+                        "Urdu",
+                        "Physics",
+                        "Computer",
+                        "PS",
+                        "Maths"
+                      ]'
                           >
                             ICS
                           </option>
                           <option value="I.com">I.Com</option>
                         </>
                       )}
-                    </select>{" "}
+                    </select>
                     {formik.errors.subjects && (
                       <div className="text-center fw-bold text-danger">
                         {formik.errors.subjects}

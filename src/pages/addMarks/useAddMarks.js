@@ -26,6 +26,10 @@ const useAddMarks = () => {
       values.class = "";
       values.subjects = "";
     },
+    onReset: (values) => {
+      values.class = "";
+      values.subjects = "";
+    },
   });
   return { formik };
 };
