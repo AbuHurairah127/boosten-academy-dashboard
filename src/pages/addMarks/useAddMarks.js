@@ -1,11 +1,15 @@
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { fetchClassSubjectsSpecified } from "./../../store/actions/marksAction";
 const useAddMarks = () => {
   const [fetchLoader, setFetchLoader] = useState(false);
   const dispatch = useDispatch();
+  const studentsList = useSelector(
+    (store) => store.marksReducer.studentsToAddMarks
+  );
+  const subjectsList = useSelector((store) => store.marksReducer.subjects);
   const formik = useFormik({
     initialValues: {
       class: "",
@@ -31,7 +35,7 @@ const useAddMarks = () => {
       values.subjects = "";
     },
   });
-  return { formik };
+  return { formik, fetchLoader, studentsList, subjectsList };
 };
 
 export default useAddMarks;

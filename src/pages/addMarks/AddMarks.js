@@ -1,26 +1,115 @@
 import React from "react";
+import ButtonLoader from "../../components/buttonLoader/ButtonLoader";
 import Footer from "../../components/footer/Footer";
 import Navbar from "../../components/navbar/Navbar";
 import "./AddMarks.css";
 import useAddMarks from "./useAddMarks";
 const AddMarks = () => {
-  const { formik } = useAddMarks();
+  const { formik, fetchLoader, studentsList, subjectsList } = useAddMarks();
   return (
     <div className="AddMarksContainer d-flex flex-column">
       <header>
         <Navbar />
       </header>
       <main>
-        <div className="text-center mt-5">
-          <button
-            type="button"
-            className="btn btn-outline-dark"
-            data-bs-toggle="modal"
-            data-bs-target="#staticBackdrop"
+        {fetchLoader ? (
+          <div
+            className="container-fluid d-flex justify-content-center align-items-center"
+            style={{
+              minHeight: "80vh",
+            }}
           >
-            Fetch Class to Add Marks
-          </button>
-        </div>
+            <ButtonLoader />
+          </div>
+        ) : studentsList.length > 0 ? (
+          <div className="container mt-4">
+            <div className="text-center card border-dark">
+              <h1 className="display-4">Add Marks</h1>
+            </div>
+            <div></div>
+            <table className="table">
+              <thead>
+                <tr>
+                  <th scope="col" className="text-center">
+                    Total Marks
+                  </th>
+                  <th scope="col" className="text-center">
+                    for
+                  </th>
+                  <th scope="col" className="text-center">
+                    Each Subject
+                  </th>
+                  {subjectsList.map((subject, index) => {
+                    return (
+                      <th scope="col" className="text-center">
+                        <input
+                          type="number"
+                          className="form-control"
+                          placeholder={subject}
+                        />
+                      </th>
+                    );
+                  })}
+                </tr>
+              </thead>
+              <thead>
+                <tr>
+                  <th scope="col" className="text-center">
+                    #
+                  </th>
+                  <th scope="col" className="text-center">
+                    Student Name
+                  </th>
+                  <th scope="col" className="text-center">
+                    Roll No.
+                  </th>
+                  {subjectsList.map((subject, index) => {
+                    return (
+                      <th scope="col" className="text-center">
+                        {subject}
+                      </th>
+                    );
+                  })}
+                </tr>
+              </thead>
+              <tbody>
+                {studentsList.map((item, index) => {
+                  return (
+                    <tr key={index}>
+                      <td className="text-center">{index + 1}</td>
+                      <td className="text-center">{item.name}</td>
+                      <td className="text-center">{item.rollNo}</td>
+                      {subjectsList.map((subject, index) => {
+                        return (
+                          <td className="text-center">
+                            <input
+                              type="number"
+                              className="form-control"
+                              placeholder={subject}
+                            />
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <div className="text-center mt-5">
+            <button
+              type="button"
+              className="btn btn-outline-dark"
+              data-bs-toggle="modal"
+              data-bs-target="#staticBackdrop"
+            >
+              Fetch Class to Add Marks
+            </button>
+          </div>
+        )}
+
+        {/* The below code is a modal that is used to fetch the class of a student. */}
         <div
           className="modal fade"
           id="staticBackdrop"
