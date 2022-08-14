@@ -1,4 +1,9 @@
-import { CREATE_NEWS, DELETE_NEWS, FETCH_NEWS } from "../types/constants";
+import {
+  CREATE_NEWS,
+  DELETE_NEWS,
+  FETCH_NEWS,
+  UPDATE_NEWS,
+} from "../types/constants";
 
 let initialState = {
   news: [],
@@ -26,6 +31,16 @@ const newsReducer = (state = initialState, action) => {
         ...state,
         news: newNews,
       };
+    }
+    case UPDATE_NEWS: {
+      let newNews = state.news.map((item) => {
+        if (item.uid === action.payload.uid) {
+          return action.payload;
+        } else {
+          return item;
+        }
+      });
+      return { news: newNews };
     }
     default: {
       return state;

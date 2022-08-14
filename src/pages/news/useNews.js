@@ -8,6 +8,7 @@ import {
 const useNews = () => {
   const [news, setNews] = useState("");
   const [buttonLoader, setButtonLoader] = useState(false);
+  const [deleteLoader, setDeleteLoader] = useState(false);
   const [isUpdate, setIsUpdate] = useState(false);
   const [updateUID, setUpdateUID] = useState("");
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ const useNews = () => {
     setNews("");
   };
   const onDeleteHandler = (uid) => {
-    dispatch(deleteNews(uid));
+    dispatch(deleteNews(uid, setDeleteLoader));
   };
   const onUpdateHandler = (item) => {
     setNews(item.newsTitle);
@@ -35,7 +36,7 @@ const useNews = () => {
   const onCTAUpdate = (e) => {
     e.preventDefault();
     setNews(e.target.value);
-    dispatch(updateNews(news, updateUID));
+    dispatch(updateNews(news, updateUID, setButtonLoader));
     setIsUpdate(false);
   };
   return {
@@ -47,6 +48,7 @@ const useNews = () => {
     onUpdateHandler,
     onCTAUpdate,
     isUpdate,
+    deleteLoader,
   };
 };
 

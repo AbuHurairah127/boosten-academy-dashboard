@@ -1,4 +1,9 @@
-import { CREATE_NEWS, DELETE_NEWS, FETCH_NEWS } from "../types/constants";
+import {
+  CREATE_NEWS,
+  DELETE_NEWS,
+  FETCH_NEWS,
+  UPDATE_NEWS,
+} from "../types/constants";
 import {
   collection,
   addDoc,
@@ -6,8 +11,10 @@ import {
   setDoc,
   query,
   getDocs,
+  getDoc,
   orderBy,
   deleteDoc,
+  where,
 } from "firebase/firestore/lite";
 import { db } from "./../../config/firebase";
 export const createNews = (data, setButtonLoader) => async (dispatch) => {
@@ -56,8 +63,9 @@ export const fetchNews = () => async (dispatch) => {
     window.notify(error.message, "error");
   }
 };
-export const deleteNews = (uid) => async (dispatch) => {
+export const deleteNews = (uid, setDeleteLoader) => async (dispatch) => {
   try {
+    setDeleteLoader(true);
     await deleteDoc(doc(db, "news", uid));
     dispatch({
       type: DELETE_NEWS,
@@ -66,6 +74,34 @@ export const deleteNews = (uid) => async (dispatch) => {
     window.notify("News is successfully deleted.", "success");
   } catch (error) {
     window.notify(error.message, "error");
+  } finally {
+    setDeleteLoader(false);
   }
 };
-export const updateNews = (newsTitle, newsUID) => async (dispatch) => {};
+export const updateNews =
+  (newsTitle, newsUID, setButtonLoader) => async (dispatch) => {
+    try {
+      setButtonLoader(true);
+      await setDoc(
+        doc(db, "news", newsUID),
+        {
+          newsTitle: newsTitle,
+          updatedAt: new Date(),
+        },
+        { merge: true }
+      );
+      let updatedNews = {
+        newsTitle: newsTitle,
+        updatedAt: new Date(),
+        uid: newsUID,
+      };
+      dispatch({
+        type: UPDATE_NEWS,
+        payload: updatedNews,
+      });
+    } catch (error) {
+      window.notify(error.message, "error");
+    } finally {
+      setButtonLoader(false);
+    }
+  };

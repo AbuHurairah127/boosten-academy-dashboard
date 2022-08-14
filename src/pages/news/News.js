@@ -15,6 +15,7 @@ const News = () => {
     onUpdateHandler,
     isUpdate,
     onCTAUpdate,
+    deleteLoader,
   } = useNews();
   const newsList = useSelector((store) => store.newsReducer.news);
   return (
@@ -38,7 +39,7 @@ const News = () => {
                 </label>
                 <input
                   type="Textarea"
-                  className="form-control"
+                  className="form-control form-control-lg"
                   name="news"
                   id=""
                   value={news}
@@ -47,7 +48,11 @@ const News = () => {
               </div>
               {isUpdate ? (
                 buttonLoader ? (
-                  <button type="button" className="btn btn-dark my-3">
+                  <button
+                    type="button"
+                    className="btn btn-dark my-3"
+                    disabled={buttonLoader}
+                  >
                     <ButtonLoader color="white" size={13} />
                   </button>
                 ) : (
@@ -61,7 +66,7 @@ const News = () => {
                   </button>
                 )
               ) : buttonLoader ? (
-                <button className="btn btn-dark my-3">
+                <button className="btn btn-dark my-3" disabled={buttonLoader}>
                   <ButtonLoader color="white" size={13} />
                 </button>
               ) : (
@@ -103,14 +108,23 @@ const News = () => {
                           >
                             <AiFillEdit />
                           </button>
-                          <button
-                            className="btn btn-outline-danger mx-2"
-                            onClick={() => {
-                              onDeleteHandler(news.uid);
-                            }}
-                          >
-                            <AiFillDelete />
-                          </button>
+                          {deleteLoader ? (
+                            <button
+                              disabled={deleteLoader}
+                              className="btn btn-danger"
+                            >
+                              <ButtonLoader color="white" />
+                            </button>
+                          ) : (
+                            <button
+                              className="btn btn-outline-danger mx-2"
+                              onClick={() => {
+                                onDeleteHandler(news.uid);
+                              }}
+                            >
+                              <AiFillDelete />
+                            </button>
+                          )}
                         </td>
                       </tr>
                     );
