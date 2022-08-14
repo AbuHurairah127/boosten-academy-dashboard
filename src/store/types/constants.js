@@ -16,3 +16,7 @@ export const FETCH_STUDENT = "FETCH_SINGLE_STUDENT";
 export const FETCH_ACADEMY = "FETCH_ACADEMY";
 //  Marks Constants
 export const FETCH_CLASS_SUBJECTS_SPECIFIED = "FETCH_CLASS_SUBJECTS_SPECIFIED";
+//News Constants
+export const CREATE_NEWS = "CREATE_NEWS";
+export const FETCH_NEWS = "FETCH_NEWS";
+export const DELETE_NEWS = "DELETE_NEWS";

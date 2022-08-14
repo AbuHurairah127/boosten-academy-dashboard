@@ -41,10 +41,11 @@ const AddMarks = () => {
                   </th>
                   {subjectsList.map((subject, index) => {
                     return (
-                      <th scope="col" className="text-center">
+                      <th key={index} scope="col" className="text-center">
                         <input
                           type="number"
                           className="form-control"
+                          name={subject}
                           placeholder={subject}
                         />
                       </th>
@@ -65,7 +66,7 @@ const AddMarks = () => {
                   </th>
                   {subjectsList.map((subject, index) => {
                     return (
-                      <th scope="col" className="text-center">
+                      <th key={index} scope="col" className="text-center">
                         {subject}
                       </th>
                     );
@@ -81,10 +82,11 @@ const AddMarks = () => {
                       <td className="text-center">{item.rollNo}</td>
                       {subjectsList.map((subject, index) => {
                         return (
-                          <td className="text-center">
+                          <td key={index} className="text-center">
                             <input
                               type="number"
                               className="form-control"
+                              name={subject}
                               placeholder={subject}
                             />
                           </td>

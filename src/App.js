@@ -8,6 +8,7 @@ import FullScreenLoader from "./components/fullScreenLoader/FullScreenLoader";
 import { auth } from "./config/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { fetchUser } from "./store/actions/authAction";
+import { fetchNews } from "./store/actions/newsAction";
 const App = () => {
   const dispatch = useDispatch();
   const [preLoader, setPreLoader] = useState(false);
@@ -23,7 +24,8 @@ const App = () => {
             userCredentials.email,
             userCredentials.password
           );
-          dispatch(fetchUser(setPreLoader, userCredentials));
+          dispatch(fetchUser(userCredentials));
+          dispatch(fetchNews());
         }
       } catch (error) {
         window.notify(error.message, "error");

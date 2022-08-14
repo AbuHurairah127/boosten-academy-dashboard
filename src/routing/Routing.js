@@ -12,6 +12,7 @@ import { Navigate } from "react-router-dom";
 import NotFound from "../pages/notFound/NotFound";
 import AddMarks from "../pages/addMarks/AddMarks";
 import MarkAttendance from "../pages/markAttendance/MarkAttendance";
+import News from "../pages/news/News";
 const Routing = () => {
   const isUserAuthenticated = useSelector(
     (store) => store.authReducer.isUserAuthenticated
@@ -34,6 +35,7 @@ const Routing = () => {
           path="/add-students"
           element={<PrivateRoutes Component={AddStudents} />}
         />
+        <Route path="/news" element={<PrivateRoutes Component={News} />} />
         <Route
           path="/add-marks"
           element={<PrivateRoutes Component={AddMarks} />}

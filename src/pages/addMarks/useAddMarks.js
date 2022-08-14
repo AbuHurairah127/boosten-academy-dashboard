@@ -10,6 +10,10 @@ const useAddMarks = () => {
     (store) => store.marksReducer.studentsToAddMarks
   );
   const subjectsList = useSelector((store) => store.marksReducer.subjects);
+  let subjectsObject = subjectsList.map((subject) => {
+    return { subject: `${subject}` };
+  });
+  console.log(subjectsObject);
   const formik = useFormik({
     initialValues: {
       class: "",

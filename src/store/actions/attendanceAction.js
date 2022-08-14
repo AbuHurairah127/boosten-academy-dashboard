@@ -12,11 +12,7 @@ export const readAllStudents = (setFetchLoader) => async (dispatch) => {
     setFetchLoader(true);
     let array = [];
     try {
-      const q = query(
-        collection(db, "students"),
-        //   where("subjects", "==", data.subjects)
-        orderBy("rollNo")
-      );
+      const q = query(collection(db, "students"), orderBy("rollNo"));
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         let data = doc.data();

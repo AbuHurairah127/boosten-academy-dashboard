@@ -39,11 +39,18 @@ const Navbar = () => {
               </Link>
             </li>
             {userRole === "superAdmin" && (
-              <li className="nav-item">
-                <Link className="nav-link" to="/admins">
-                  Admins
-                </Link>
-              </li>
+              <>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/admins">
+                    Admins
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/news">
+                    News
+                  </Link>
+                </li>
+              </>
             )}
 
             <li className="nav-item dropdown">
@@ -78,6 +85,11 @@ const Navbar = () => {
                   <>
                     <li>
                       <hr className="dropdown-divider" />
+                    </li>
+                    <li>
+                      <Link className="dropdown-item" to="/add-news">
+                        Add News
+                      </Link>
                     </li>
                     <li>
                       <Link className="dropdown-item" to="/add-admins">
