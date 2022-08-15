@@ -45,7 +45,7 @@ export const login = (data, setIsProcessing) => async (dispatch) => {
     const errorMessage = error.message;
     window.notify(errorMessage, "error");
   } finally {
-    // setIsProcessing(false);
+    setIsProcessing(false);
   }
 };
 export const logout = () => async (dispatch) => {

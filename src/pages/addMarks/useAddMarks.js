@@ -13,7 +13,31 @@ const useAddMarks = () => {
   let subjectsObject = subjectsList.map((subject) => {
     return { subject: `${subject}` };
   });
-  console.log(subjectsObject);
+  const onChangeHandlerForTotalMarks = (e, index) => {
+    const totalMarks = subjectsObject.map((subject, i) =>
+      index === i
+        ? Object.assign(subject, { TotalMarks: e.target.value })
+        : subject
+    );
+  };
+  const onChangeHandlerForObtainedMarks = (e, INDEX, i) => {
+    const obtainedMarksList = studentsList.map((student, index) => {
+      if (INDEX === index) {
+        const obtainedMarks = subjectsObject.map((subject, I) =>
+          I === i
+            ? Object.assign(subject, { obtainedMarks: e.target.value })
+            : subject
+        );
+        Object.assign(student, { obtainedMarks });
+        console.log(student, "if");
+        return student;
+      } else {
+        console.log(student, "else");
+        return student;
+      }
+    });
+    console.log(obtainedMarksList);
+  };
   const formik = useFormik({
     initialValues: {
       class: "",
@@ -39,7 +63,14 @@ const useAddMarks = () => {
       values.subjects = "";
     },
   });
-  return { formik, fetchLoader, studentsList, subjectsList };
+  return {
+    formik,
+    fetchLoader,
+    studentsList,
+    subjectsList,
+    onChangeHandlerForTotalMarks,
+    onChangeHandlerForObtainedMarks,
+  };
 };
 
 export default useAddMarks;

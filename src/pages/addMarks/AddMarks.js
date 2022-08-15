@@ -5,7 +5,14 @@ import Navbar from "../../components/navbar/Navbar";
 import "./AddMarks.css";
 import useAddMarks from "./useAddMarks";
 const AddMarks = () => {
-  const { formik, fetchLoader, studentsList, subjectsList } = useAddMarks();
+  const {
+    formik,
+    fetchLoader,
+    studentsList,
+    subjectsList,
+    onChangeHandlerForTotalMarks,
+    onChangeHandlerForObtainedMarks,
+  } = useAddMarks();
   return (
     <div className="AddMarksContainer d-flex flex-column">
       <header>
@@ -47,6 +54,9 @@ const AddMarks = () => {
                           className="form-control"
                           name={subject}
                           placeholder={subject}
+                          onChange={(e) =>
+                            onChangeHandlerForTotalMarks(e, index)
+                          }
                         />
                       </th>
                     );
@@ -80,14 +90,17 @@ const AddMarks = () => {
                       <td className="text-center">{index + 1}</td>
                       <td className="text-center">{item.name}</td>
                       <td className="text-center">{item.rollNo}</td>
-                      {subjectsList.map((subject, index) => {
+                      {subjectsList.map((subject, i) => {
                         return (
-                          <td key={index} className="text-center">
+                          <td key={i} className="text-center">
                             <input
                               type="number"
                               className="form-control"
                               name={subject}
                               placeholder={subject}
+                              onChange={(e) => {
+                                onChangeHandlerForObtainedMarks(e, index, i);
+                              }}
                             />
                           </td>
                         );
