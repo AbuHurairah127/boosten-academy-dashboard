@@ -11,8 +11,8 @@ const AddMarks = () => {
     studentsList,
     subjectsList,
     onChangeHandlerForTotalMarks,
-    onChangeHandlerForObtainedMarks,
   } = useAddMarks();
+  let i;
   return (
     <div className="AddMarksContainer d-flex flex-column">
       <header>
@@ -33,7 +33,6 @@ const AddMarks = () => {
             <div className="text-center card border-dark">
               <h1 className="display-4">Add Marks</h1>
             </div>
-            <div></div>
             <table className="table">
               <thead>
                 <tr>
@@ -54,61 +53,15 @@ const AddMarks = () => {
                           className="form-control"
                           name={subject}
                           placeholder={subject}
-                          onChange={(e) =>
-                            onChangeHandlerForTotalMarks(e, index)
-                          }
+                          onChange={(e) => {
+                            onChangeHandlerForTotalMarks(e, index);
+                          }}
                         />
                       </th>
                     );
                   })}
                 </tr>
               </thead>
-              <thead>
-                <tr>
-                  <th scope="col" className="text-center">
-                    #
-                  </th>
-                  <th scope="col" className="text-center">
-                    Student Name
-                  </th>
-                  <th scope="col" className="text-center">
-                    Roll No.
-                  </th>
-                  {subjectsList.map((subject, index) => {
-                    return (
-                      <th key={index} scope="col" className="text-center">
-                        {subject}
-                      </th>
-                    );
-                  })}
-                </tr>
-              </thead>
-              <tbody>
-                {studentsList.map((item, index) => {
-                  return (
-                    <tr key={index}>
-                      <td className="text-center">{index + 1}</td>
-                      <td className="text-center">{item.name}</td>
-                      <td className="text-center">{item.rollNo}</td>
-                      {subjectsList.map((subject, i) => {
-                        return (
-                          <td key={i} className="text-center">
-                            <input
-                              type="number"
-                              className="form-control"
-                              name={subject}
-                              placeholder={subject}
-                              onChange={(e) => {
-                                onChangeHandlerForObtainedMarks(e, index, i);
-                              }}
-                            />
-                          </td>
-                        );
-                      })}
-                    </tr>
-                  );
-                })}
-              </tbody>
             </table>
           </div>
         ) : (
