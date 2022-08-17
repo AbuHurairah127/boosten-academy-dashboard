@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { fetchClassSubjectsSpecified } from "./../../store/actions/marksAction";
 const useAddMarks = () => {
   const [fetchLoader, setFetchLoader] = useState(false);
@@ -13,11 +13,9 @@ const useAddMarks = () => {
   const subjectsList = useSelector((store) => store.marksReducer.subjects);
   // Creating required Variables
   const [studentsList, setStudentsList] = useState([]);
-  let subjectsObject = {};
-  let totalMarks = {};
-  let obtainedMarks = {};
-  // let obtainedMarksList = [];
-
+  const subjectsObject = {};
+  let totalMarks = useRef({});
+  let obtainedMarksList = useRef([]);
   /**
    * It takes an object, a key, and a value, and sets the value of the key in the object to the value.
    * @param object - The object you want to update
@@ -34,33 +32,36 @@ const useAddMarks = () => {
     subjectsList.forEach((subject) => {
       updateObject(subjectsObject, subject);
     });
-    totalMarks = subjectsObject;
-    console.log(
-      "🚀 ~ file: useAddMarks.js ~ line 38 ~ useEffect ~ totalMarks",
-      totalMarks
-    );
-    obtainedMarks = subjectsObject;
-    console.log(
-      "🚀 ~ file: useAddMarks.js ~ line 40 ~ useEffect ~ obtainedMarks",
-      obtainedMarks
-    );
-    const obtainedMarksList = students.map(() => {
-      return obtainedMarks;
+    totalMarks.current = subjectsObject;
+    obtainedMarksList.current = students.map(() => {
+      return subjectsObject;
     });
-    console.log(
-      obtainedMarksList,
-      obtainedMarksList.length,
-      "obtainedMarksList"
-    );
-  }, [subjectsList]);
-  const onChangeHandlerForTotalMarks = (e) => {
-    totalMarks = { ...totalMarks, [e.target.name]: parseInt(e.target.value) };
-    console.log(
-      "🚀 ~ file: useAddMarks.js ~ line 58 ~ onChangeHandlerForTotalMarks ~ totalMarks",
-      totalMarks
-    );
-  };
+    console.log(obtainedMarksList.current);
+  }, [subjectsList, students]);
 
+  const onChangeHandlerForTotalMarks = (e) => {
+    totalMarks.current = {
+      ...totalMarks.current,
+      [e.target.name]: parseInt(e.target.value),
+    };
+  };
+  const onChangeHandlerForObtainedMarks = (e, i) => {
+    console.log(obtainedMarksList.current, "onchange start");
+    obtainedMarksList.current = obtainedMarksList.current.map(
+      (obtainedMark, index) => {
+        if (i === index) {
+          const updatedMark = {
+            ...obtainedMark,
+            [e.target.name]: parseInt(e.target.value),
+          };
+          return updatedMark;
+        } else {
+          return obtainedMark;
+        }
+      }
+    );
+    console.log(obtainedMarksList.current, "obtainedMarksList");
+  };
   const formik = useFormik({
     initialValues: {
       class: "",
@@ -92,6 +93,7 @@ const useAddMarks = () => {
     studentsList,
     subjectsList,
     onChangeHandlerForTotalMarks,
+    onChangeHandlerForObtainedMarks,
   };
 };
 

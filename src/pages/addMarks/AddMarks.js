@@ -11,6 +11,7 @@ const AddMarks = () => {
     studentsList,
     subjectsList,
     onChangeHandlerForTotalMarks,
+    onChangeHandlerForObtainedMarks,
   } = useAddMarks();
   return (
     <div className="AddMarksContainer d-flex flex-column">
@@ -90,10 +91,13 @@ const AddMarks = () => {
                         return (
                           <td key={i} scope="row" className="text-center">
                             <input
-                              type="text"
+                              type="number"
                               className="form-control"
                               placeholder={subject}
                               name={subject}
+                              onChange={(e) => {
+                                onChangeHandlerForObtainedMarks(e, index);
+                              }}
                             />
                           </td>
                         );
