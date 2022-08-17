@@ -52,9 +52,7 @@ const AddMarks = () => {
                           className="form-control"
                           name={subject}
                           placeholder={subject}
-                          onChange={(e) => {
-                            onChangeHandlerForTotalMarks(e);
-                          }}
+                          onChange={onChangeHandlerForTotalMarks}
                         />
                       </th>
                     );

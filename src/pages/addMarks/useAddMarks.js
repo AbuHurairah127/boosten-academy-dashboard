@@ -6,33 +6,29 @@ import { fetchClassSubjectsSpecified } from "./../../store/actions/marksAction";
 const useAddMarks = () => {
   const [fetchLoader, setFetchLoader] = useState(false);
   const dispatch = useDispatch();
-  const studentsList = useSelector(
+  const students = useSelector(
     (store) => store.marksReducer.studentsToAddMarks
   );
+  const [studentsList, setStudentsList] = useState([]);
+  useEffect(() => {
+    setStudentsList(students);
+  }, [students]);
   const subjectsList = useSelector((store) => store.marksReducer.subjects);
   let subjectsObject = {};
-  const [totalMarks, setTotalMarks] = useState({});
+  let totalMarks = {};
   const updateObject = (object, key, value) => {
     object[key] = value || "";
   };
   useEffect(() => {
     subjectsList.forEach((subject) => {
-      updateObject(subjectsObject, [subject]);
+      updateObject(subjectsObject, subject);
     });
-    setTotalMarks(subjectsObject);
-    console.log(totalMarks);
+    totalMarks = subjectsObject;
   }, [subjectsList]);
   const onChangeHandlerForTotalMarks = (e) => {
-    setTotalMarks({ ...totalMarks, [e.target.name]: e.target.value });
+    totalMarks = { ...totalMarks, [e.target.name]: e.target.value };
+  };
 
-    console.log(totalMarks, "onchange");
-  };
-  const onChangeHandlerForObtainedMarks = (e, i) => {
-    // totalMarks = totalMarks.map((mark, index) =>
-    //   index === i ? { [e.target.name]: e.target.value } : mark
-    // );
-    // console.log(totalMarks);
-  };
   const formik = useFormik({
     initialValues: {
       class: "",
