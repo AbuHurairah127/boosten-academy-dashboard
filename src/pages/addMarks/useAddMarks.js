@@ -25,7 +25,7 @@ const useAddMarks = () => {
    * @param value - The value to be updated.
    */
   const updateObject = (object, key, value) => {
-    object[key] = value || "";
+    object[key] = value || 0;
   };
   useEffect(() => {
     setStudentsList(students);
@@ -35,7 +35,15 @@ const useAddMarks = () => {
       updateObject(subjectsObject, subject);
     });
     totalMarks = subjectsObject;
+    console.log(
+      "🚀 ~ file: useAddMarks.js ~ line 38 ~ useEffect ~ totalMarks",
+      totalMarks
+    );
     obtainedMarks = subjectsObject;
+    console.log(
+      "🚀 ~ file: useAddMarks.js ~ line 40 ~ useEffect ~ obtainedMarks",
+      obtainedMarks
+    );
     const obtainedMarksList = students.map(() => {
       return obtainedMarks;
     });
@@ -46,7 +54,11 @@ const useAddMarks = () => {
     );
   }, [subjectsList]);
   const onChangeHandlerForTotalMarks = (e) => {
-    totalMarks = { ...totalMarks, [e.target.name]: e.target.value };
+    totalMarks = { ...totalMarks, [e.target.name]: parseInt(e.target.value) };
+    console.log(
+      "🚀 ~ file: useAddMarks.js ~ line 58 ~ onChangeHandlerForTotalMarks ~ totalMarks",
+      totalMarks
+    );
   };
 
   const formik = useFormik({
