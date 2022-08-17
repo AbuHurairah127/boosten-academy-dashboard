@@ -6,24 +6,44 @@ import { fetchClassSubjectsSpecified } from "./../../store/actions/marksAction";
 const useAddMarks = () => {
   const [fetchLoader, setFetchLoader] = useState(false);
   const dispatch = useDispatch();
+  //Fetching data from store
   const students = useSelector(
     (store) => store.marksReducer.studentsToAddMarks
   );
-  const [studentsList, setStudentsList] = useState([]);
-  useEffect(() => {
-    setStudentsList(students);
-  }, [students]);
   const subjectsList = useSelector((store) => store.marksReducer.subjects);
+  // Creating required Variables
+  const [studentsList, setStudentsList] = useState([]);
   let subjectsObject = {};
   let totalMarks = {};
+  let obtainedMarks = {};
+  // let obtainedMarksList = [];
+
+  /**
+   * It takes an object, a key, and a value, and sets the value of the key in the object to the value.
+   * @param object - The object you want to update
+   * @param key - The key of the object you want to update.
+   * @param value - The value to be updated.
+   */
   const updateObject = (object, key, value) => {
     object[key] = value || "";
   };
+  useEffect(() => {
+    setStudentsList(students);
+  }, [students]);
   useEffect(() => {
     subjectsList.forEach((subject) => {
       updateObject(subjectsObject, subject);
     });
     totalMarks = subjectsObject;
+    obtainedMarks = subjectsObject;
+    const obtainedMarksList = students.map(() => {
+      return obtainedMarks;
+    });
+    console.log(
+      obtainedMarksList,
+      obtainedMarksList.length,
+      "obtainedMarksList"
+    );
   }, [subjectsList]);
   const onChangeHandlerForTotalMarks = (e) => {
     totalMarks = { ...totalMarks, [e.target.name]: e.target.value };
