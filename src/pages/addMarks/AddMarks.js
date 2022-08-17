@@ -12,7 +12,6 @@ const AddMarks = () => {
     subjectsList,
     onChangeHandlerForTotalMarks,
   } = useAddMarks();
-  let i;
   return (
     <div className="AddMarksContainer d-flex flex-column">
       <header>
@@ -54,7 +53,7 @@ const AddMarks = () => {
                           name={subject}
                           placeholder={subject}
                           onChange={(e) => {
-                            onChangeHandlerForTotalMarks(e, index);
+                            onChangeHandlerForTotalMarks(e);
                           }}
                         />
                       </th>
@@ -62,6 +61,49 @@ const AddMarks = () => {
                   })}
                 </tr>
               </thead>
+              <thead>
+                <tr>
+                  <th scope="col" className="text-center">
+                    #
+                  </th>
+                  <th scope="col" className="text-center">
+                    Student Name
+                  </th>
+                  <th scope="col" className="text-center">
+                    Roll No.
+                  </th>
+                  {subjectsList.map((subject, index) => {
+                    return (
+                      <th key={index} scope="col" className="text-center">
+                        {subject}
+                      </th>
+                    );
+                  })}
+                </tr>
+              </thead>
+              <tbody>
+                {studentsList.map((student, index) => {
+                  return (
+                    <tr key={index}>
+                      <td className="text-center">{index + 1}</td>
+                      <td className="text-center">{student.name}</td>
+                      <td className="text-center">{student.rollNo}</td>
+                      {subjectsList.map((subject, i) => {
+                        return (
+                          <td key={i} scope="row" className="text-center">
+                            <input
+                              type="text"
+                              className="form-control"
+                              placeholder={subject}
+                              name={subject}
+                            />
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  );
+                })}
+              </tbody>
             </table>
           </div>
         ) : (

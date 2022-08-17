@@ -10,14 +10,28 @@ const useAddMarks = () => {
     (store) => store.marksReducer.studentsToAddMarks
   );
   const subjectsList = useSelector((store) => store.marksReducer.subjects);
-  let totalMarks = subjectsList.map((subject) => {
-    return { [subject]: "" };
-  });
-  const onChangeHandlerForTotalMarks = (e, i) => {
-    totalMarks = totalMarks.map((mark, index) =>
-      index === i ? { [e.target.name]: e.target.value } : mark
-    );
+  let subjectsObject = {};
+  const [totalMarks, setTotalMarks] = useState({});
+  const updateObject = (object, key, value) => {
+    object[key] = value || "";
+  };
+  useEffect(() => {
+    subjectsList.forEach((subject) => {
+      updateObject(subjectsObject, [subject]);
+    });
+    setTotalMarks(subjectsObject);
     console.log(totalMarks);
+  }, [subjectsList]);
+  const onChangeHandlerForTotalMarks = (e) => {
+    setTotalMarks({ ...totalMarks, [e.target.name]: e.target.value });
+
+    console.log(totalMarks, "onchange");
+  };
+  const onChangeHandlerForObtainedMarks = (e, i) => {
+    // totalMarks = totalMarks.map((mark, index) =>
+    //   index === i ? { [e.target.name]: e.target.value } : mark
+    // );
+    // console.log(totalMarks);
   };
   const formik = useFormik({
     initialValues: {
