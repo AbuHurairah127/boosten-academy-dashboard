@@ -10,6 +10,7 @@ const AddMarks = () => {
     fetchLoader,
     studentsList,
     subjectsList,
+    setTestNo,
     onChangeHandlerForTotalMarks,
     onChangeHandlerForObtainedMarks,
     onMarksSubmitHandler,
@@ -42,10 +43,11 @@ const AddMarks = () => {
               </div>
               <div className="col-10">
                 <input
-                  type="text"
+                  type="number"
                   id="testNo"
                   className="form-control"
                   placeholder="Test no e.g 1"
+                  onChange={(e) => setTestNo(e.target.value)}
                 />
               </div>
             </div>

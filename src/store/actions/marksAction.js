@@ -19,6 +19,7 @@ export const fetchClassSubjectsSpecified =
       if (data.class === "9th" || data.class === "10th") {
         array = array.filter((student) => student.class === data.class);
       }
+      array = array.sort((a, b) => a.rollNo - b.rollNo);
       let students = {
         studentsSubjects: subjects,
         studentsArray: array,

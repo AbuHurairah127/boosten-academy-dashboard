@@ -13,6 +13,7 @@ const useAddMarks = () => {
   const subjectsList = useSelector((store) => store.marksReducer.subjects);
   // Creating required Variables
   const [studentsList, setStudentsList] = useState([]);
+  const [testNo, setTestNo] = useState("");
   const subjectsObject = {};
   let totalMarks = useRef({});
   let obtainedMarksList = useRef([]);
@@ -60,7 +61,9 @@ const useAddMarks = () => {
     );
   };
   const onMarksSubmitHandler = () => {
-    alert("working");
+    console.log(parseInt(testNo), "testNo");
+    console.log(totalMarks, "totalMarks");
+    console.log(obtainedMarksList, "obtainedMarksList");
   };
   const formik = useFormik({
     initialValues: {
@@ -92,6 +95,7 @@ const useAddMarks = () => {
     fetchLoader,
     studentsList,
     subjectsList,
+    setTestNo,
     onChangeHandlerForTotalMarks,
     onChangeHandlerForObtainedMarks,
     onMarksSubmitHandler,
