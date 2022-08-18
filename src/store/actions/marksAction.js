@@ -1,4 +1,10 @@
-import { query, collection, where, getDocs } from "firebase/firestore/lite";
+import {
+  query,
+  collection,
+  where,
+  getDocs,
+  addDoc,
+} from "firebase/firestore/lite";
 import { FETCH_STUDENT } from "./../types/constants";
 import { db } from "./../../config/firebase";
 export const fetchClassSubjectsSpecified =
@@ -30,10 +36,7 @@ export const fetchClassSubjectsSpecified =
           payload: students,
         });
       } else {
-        window.notify(
-          `You have no students available in this class.Please add via clicking on the button 👈🏻`,
-          "info"
-        );
+        window.notify(`You have no students available in this class.`, "info");
       }
     } catch (error) {
       window.notify(error.message, "error");
@@ -41,5 +44,19 @@ export const fetchClassSubjectsSpecified =
       setFetchLoader(false);
     }
   };
-export const uploadMarks =
-  (totalMarks, obtainedMarksList, testNo) => async (dispatch) => {};
+export const uploadMarks = (data, setButtonLoader) => async (dispatch) => {
+  try {
+    setButtonLoader(true);
+    await data.forEach((studentObtainedMarks) => {
+      addDoc(collection(db, "marks"), studentObtainedMarks);
+    });
+    window.notify(
+      "Marks has been successfully updated on the portal.",
+      "success"
+    );
+  } catch (error) {
+    window.notify(error.message, "error");
+  } finally {
+    setButtonLoader(false);
+  }
+};

@@ -1,3 +1,4 @@
+import { Button } from "bootstrap";
 import React from "react";
 import ButtonLoader from "../../components/buttonLoader/ButtonLoader";
 import Footer from "../../components/footer/Footer";
@@ -14,6 +15,7 @@ const AddMarks = () => {
     onChangeHandlerForTotalMarks,
     onChangeHandlerForObtainedMarks,
     onMarksSubmitHandler,
+    buttonLoader,
   } = useAddMarks();
   return (
     <div className="AddMarksContainer d-flex flex-column">
@@ -31,7 +33,7 @@ const AddMarks = () => {
             <ButtonLoader />
           </div>
         ) : studentsList.length > 0 ? (
-          <div className="container mt-4">
+          <div className="container my-3">
             <div className="text-center card border-dark">
               <h1 className="display-4">Add Marks</h1>
             </div>
@@ -127,13 +129,23 @@ const AddMarks = () => {
             </table>
             <div className="row">
               <div className="col text-center">
-                <button
-                  type="button"
-                  className="btn btn-dark"
-                  onClick={onMarksSubmitHandler}
-                >
-                  Submit Marks
-                </button>
+                {buttonLoader ? (
+                  <button
+                    type="button"
+                    className="btn btn-dark"
+                    disabled={buttonLoader}
+                  >
+                    <ButtonLoader color="white" size={12} />
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    className="btn btn-dark"
+                    onClick={onMarksSubmitHandler}
+                  >
+                    Submit Marks
+                  </button>
+                )}
               </div>
             </div>
           </div>

@@ -2,9 +2,13 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect, useRef } from "react";
-import { fetchClassSubjectsSpecified } from "./../../store/actions/marksAction";
+import {
+  fetchClassSubjectsSpecified,
+  uploadMarks,
+} from "./../../store/actions/marksAction";
 const useAddMarks = () => {
   const [fetchLoader, setFetchLoader] = useState(false);
+  const [buttonLoader, setButtonLoader] = useState(false);
   const dispatch = useDispatch();
   //Fetching data from store
   const students = useSelector(
@@ -61,9 +65,19 @@ const useAddMarks = () => {
     );
   };
   const onMarksSubmitHandler = () => {
-    console.log(parseInt(testNo), "testNo");
-    console.log(totalMarks, "totalMarks");
-    console.log(obtainedMarksList, "obtainedMarksList");
+    if (testNo !== "") {
+      let studentsObtainedMarks = studentsList.map((student, index) => {
+        return {
+          studentId: student.uid,
+          totalMarks: totalMarks.current,
+          obtainedMarks: obtainedMarksList.current[index],
+          testNo: parseInt(testNo),
+        };
+      });
+      dispatch(uploadMarks(studentsObtainedMarks, setButtonLoader));
+    } else {
+      window.notify("Add test number please!", "error");
+    }
   };
   const formik = useFormik({
     initialValues: {
@@ -99,6 +113,7 @@ const useAddMarks = () => {
     onChangeHandlerForTotalMarks,
     onChangeHandlerForObtainedMarks,
     onMarksSubmitHandler,
+    buttonLoader,
   };
 };
 

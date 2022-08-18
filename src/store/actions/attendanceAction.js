@@ -42,7 +42,7 @@ export const readAllStudents = (setFetchLoader) => async (dispatch) => {
 export const createAttendance = (data, setButtonLoader) => async (dispatch) => {
   try {
     setButtonLoader(true);
-    await data.map((todayAttendance) => {
+    await data.forEach((todayAttendance) => {
       addDoc(collection(db, "attendance"), todayAttendance);
     });
     window.notify(
