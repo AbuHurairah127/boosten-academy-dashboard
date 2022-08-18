@@ -36,7 +36,6 @@ const useAddMarks = () => {
     obtainedMarksList.current = students.map(() => {
       return subjectsObject;
     });
-    console.log(obtainedMarksList.current);
   }, [subjectsList, students]);
 
   const onChangeHandlerForTotalMarks = (e) => {
@@ -46,7 +45,6 @@ const useAddMarks = () => {
     };
   };
   const onChangeHandlerForObtainedMarks = (e, i) => {
-    console.log(obtainedMarksList.current, "onchange start");
     obtainedMarksList.current = obtainedMarksList.current.map(
       (obtainedMark, index) => {
         if (i === index) {
@@ -60,7 +58,9 @@ const useAddMarks = () => {
         }
       }
     );
-    console.log(obtainedMarksList.current, "obtainedMarksList");
+  };
+  const onMarksSubmitHandler = () => {
+    alert("working");
   };
   const formik = useFormik({
     initialValues: {
@@ -94,6 +94,7 @@ const useAddMarks = () => {
     subjectsList,
     onChangeHandlerForTotalMarks,
     onChangeHandlerForObtainedMarks,
+    onMarksSubmitHandler,
   };
 };
 

@@ -12,6 +12,7 @@ const AddMarks = () => {
     subjectsList,
     onChangeHandlerForTotalMarks,
     onChangeHandlerForObtainedMarks,
+    onMarksSubmitHandler,
   } = useAddMarks();
   return (
     <div className="AddMarksContainer d-flex flex-column">
@@ -32,6 +33,21 @@ const AddMarks = () => {
           <div className="container mt-4">
             <div className="text-center card border-dark">
               <h1 className="display-4">Add Marks</h1>
+            </div>
+            <div className="row my-2">
+              <div className="col-2">
+                <label htmlFor="testNo" className="form-label">
+                  Test No.
+                </label>
+              </div>
+              <div className="col-10">
+                <input
+                  type="text"
+                  id="testNo"
+                  className="form-control"
+                  placeholder="Test no e.g 1"
+                />
+              </div>
             </div>
             <table className="table">
               <thead>
@@ -107,6 +123,17 @@ const AddMarks = () => {
                 })}
               </tbody>
             </table>
+            <div className="row">
+              <div className="col text-center">
+                <button
+                  type="button"
+                  className="btn btn-dark"
+                  onClick={onMarksSubmitHandler}
+                >
+                  Submit Marks
+                </button>
+              </div>
+            </div>
           </div>
         ) : (
           <div className="text-center mt-5">

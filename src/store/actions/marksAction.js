@@ -40,3 +40,5 @@ export const fetchClassSubjectsSpecified =
       setFetchLoader(false);
     }
   };
+export const uploadMarks =
+  (totalMarks, obtainedMarksList, testNo) => async (dispatch) => {};
