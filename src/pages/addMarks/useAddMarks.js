@@ -69,11 +69,15 @@ const useAddMarks = () => {
       let studentsObtainedMarks = studentsList.map((student, index) => {
         return {
           studentId: student.uid,
+          rollNo: student.rollNo,
           totalMarks: totalMarks.current,
           obtainedMarks: obtainedMarksList.current[index],
           testNo: parseInt(testNo),
         };
       });
+      console.log("====================================");
+      console.log(studentsObtainedMarks);
+      console.log("====================================");
       dispatch(uploadMarks(studentsObtainedMarks, setButtonLoader));
     } else {
       window.notify("Add test number please!", "error");

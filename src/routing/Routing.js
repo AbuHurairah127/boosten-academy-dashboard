@@ -28,14 +28,14 @@ const Routing = () => {
         <Route path="*" to={<NotFound />} />
         <Route
           path="/login"
-          element={isUserAuthenticated ? <Navigate to="/" /> : <Login />}
+          element={
+            isUserAuthenticated ? <Navigate to="/students" /> : <Login />
+          }
         />
-        <Route path="/" element={<PrivateRoutes Component={Home} />} />
         <Route
           path="/add-students"
           element={<PrivateRoutes Component={AddStudents} />}
         />
-        <Route path="/news" element={<PrivateRoutes Component={News} />} />
         <Route
           path="/add-marks"
           element={<PrivateRoutes Component={AddMarks} />}
@@ -45,10 +45,7 @@ const Routing = () => {
           element={<PrivateRoutes Component={MarkAttendance} />}
         />
         <Route path="/login" element={<Login />} />
-        <Route
-          path="/students"
-          element={<PrivateRoutes Component={Students} />}
-        />
+        <Route path="/" element={<PrivateRoutes Component={Students} />} />
         <Route
           path="/add-admins"
           element={
@@ -74,6 +71,20 @@ const Routing = () => {
               )
             ) : (
               <PrivateRoutes Component={Admins} />
+            )
+          }
+        />
+        <Route
+          path="/news"
+          element={
+            isUserAuthenticated ? (
+              userRole === "superAdmin" ? (
+                <PrivateRoutes Component={News} />
+              ) : (
+                <Navigate to="/" />
+              )
+            ) : (
+              <PrivateRoutes Component={News} />
             )
           }
         />

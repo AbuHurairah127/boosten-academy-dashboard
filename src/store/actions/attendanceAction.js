@@ -5,6 +5,8 @@ import {
   query,
   orderBy,
   addDoc,
+  doc,
+  setDoc,
 } from "firebase/firestore/lite";
 import { FETCH_ACADEMY } from "../types/constants";
 export const readAllStudents = (setFetchLoader) => async (dispatch) => {
@@ -43,7 +45,17 @@ export const createAttendance = (data, setButtonLoader) => async (dispatch) => {
   try {
     setButtonLoader(true);
     await data.forEach((todayAttendance) => {
-      addDoc(collection(db, "attendance"), todayAttendance);
+      setDoc(
+        doc(db, "attendance", todayAttendance.studentId),
+        {
+          [todayAttendance.attendanceDate]: {
+            attendanceStatus: todayAttendance.attendanceStatus,
+            attendanceDate: todayAttendance.attendanceDate,
+            studentId: todayAttendance.studentId,
+          },
+        },
+        { merge: true }
+      );
     });
     window.notify(
       "Attendance has been successfully updated on the portal.",

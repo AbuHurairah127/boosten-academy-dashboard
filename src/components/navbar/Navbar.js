@@ -30,11 +30,6 @@ const Navbar = () => {
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
               <Link className="nav-link" to="/">
-                Home
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/students">
                 Students
               </Link>
             </li>
@@ -53,50 +48,16 @@ const Navbar = () => {
               </>
             )}
 
-            <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown-toggle"
-                href="/"
-                id="navbarDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Add
-              </a>
-              <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li>
-                  <Link className="dropdown-item" to="/add-students">
-                    Add Students
-                  </Link>
-                </li>
-                <li>
-                  <Link className="dropdown-item" to="/add-marks">
-                    Add Marks
-                  </Link>
-                </li>
-                <li>
-                  <Link className="dropdown-item" to="/mark-attendance">
-                    Mark Attendance
-                  </Link>
-                </li>
-
-                {userRole === "superAdmin" && (
-                  <>
-                    <li>
-                      <hr className="dropdown-divider" />
-                    </li>
-
-                    <li>
-                      <Link className="dropdown-item" to="/add-admins">
-                        Add Admins
-                      </Link>
-                    </li>
-                  </>
-                )}
-              </ul>
+            <li className="nav-item">
+              <Link className="nav-link" to="/add-marks">
+                Add Marks
+              </Link>
             </li>
-            <li className="nav-item"></li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/mark-attendance">
+                Mark Attendance
+              </Link>
+            </li>
           </ul>
           <button className="btn btn-outline-light mx-4" onClick={logoutUser}>
             Logout
