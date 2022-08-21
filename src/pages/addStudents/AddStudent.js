@@ -17,7 +17,7 @@ const AddStudent = () => {
         >
           <div className="d-flex flex-row-reverse align-items-center justify-content-between">
             <div className="text-end">
-              <Link to="/students">
+              <Link to="/">
                 <AiOutlineCloseCircle color="#000" size={30} />
               </Link>
             </div>
