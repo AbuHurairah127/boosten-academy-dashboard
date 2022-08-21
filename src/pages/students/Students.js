@@ -292,7 +292,9 @@ const Students = () => {
                               >
                                 ICS
                               </option>
-                              <option value="I.com">I.Com</option>
+                              <option value='["English","Urdu","Economics","Principle of Commerce","IS","Business Mathematics","Principles of  Accounting"]'>
+                                I.Com
+                              </option>
                             </>
                           )}
                           {/* Subjects for 2nd Year */}
@@ -334,7 +336,9 @@ const Students = () => {
                               >
                                 ICS
                               </option>
-                              <option value="I.com">I.Com</option>
+                              <option value='["English", "Urdu","Commercial Geography","Principles of Banking","Business Statistics","Principles of Accounting","PS"]'>
+                                I.Com
+                              </option>
                             </>
                           )}
                         </select>{" "}
