@@ -101,6 +101,7 @@ const Students = () => {
                         <button
                           className="btn btn-outline-danger mx-2"
                           onClick={() => onDeleteHandler(item.uid)}
+                          disabled={buttonLoader}
                         >
                           {buttonLoader ? (
                             <ButtonLoader color="red" size={10} />
