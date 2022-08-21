@@ -59,7 +59,7 @@ export const logout = () => async (dispatch) => {
     });
   } catch (error) {}
 };
-export const fetchUser = (setPreLoader, data) => {
+export const fetchUser = (data) => {
   return {
     type: LOGIN,
     payload: data,

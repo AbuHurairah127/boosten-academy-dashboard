@@ -99,13 +99,6 @@ const Students = () => {
 
                       <td className="text-center">
                         <button
-                          className="btn btn-outline-primary"
-                          data-bs-toggle="modal"
-                          data-bs-target="#staticBackdrop"
-                        >
-                          <AiFillEdit />
-                        </button>
-                        <button
                           className="btn btn-outline-danger mx-2"
                           onClick={() => onDeleteHandler(item.uid)}
                         >
@@ -114,9 +107,6 @@ const Students = () => {
                           ) : (
                             <AiFillDelete />
                           )}
-                        </button>
-                        <button className="btn btn-outline-primary px-2">
-                          <AiFillEye />
                         </button>
                       </td>
                     </tr>

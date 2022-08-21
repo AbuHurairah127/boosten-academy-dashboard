@@ -184,6 +184,8 @@ export const deleteStudent = (data, setButtonLoader) => async (dispatch) => {
   try {
     setButtonLoader(true);
     await deleteDoc(doc(db, "students", data));
+    await deleteDoc(doc(db, "attendance", data));
+    await deleteDoc(doc(db, "marks", data));
     dispatch({
       type: DELETE_STUDENTS,
       payload: data,

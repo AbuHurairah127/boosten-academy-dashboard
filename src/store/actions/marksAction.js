@@ -3,7 +3,8 @@ import {
   collection,
   where,
   getDocs,
-  addDoc,
+  setDoc,
+  doc,
 } from "firebase/firestore/lite";
 import { FETCH_STUDENT } from "./../types/constants";
 import { db } from "./../../config/firebase";
@@ -48,7 +49,13 @@ export const uploadMarks = (data, setButtonLoader) => async (dispatch) => {
   try {
     setButtonLoader(true);
     await data.forEach((studentObtainedMarks) => {
-      addDoc(collection(db, "marks"), studentObtainedMarks);
+      setDoc(
+        doc(db, "marks", studentObtainedMarks.studentId),
+        {
+          [studentObtainedMarks.testNo]: studentObtainedMarks,
+        },
+        { merge: true }
+      );
     });
     window.notify(
       "Marks has been successfully updated on the portal.",
