@@ -118,13 +118,21 @@ const Students = () => {
           ) : (
             <div className="col text-center my-4">
               <a
-                className="btn btn-outline-dark px-5 my-5"
+                className="btn btn-outline-dark px-5 m-2"
                 data-bs-toggle="modal"
                 href="#exampleModalToggle"
                 role="button"
               >
                 Fetch Students
               </a>
+              <button
+                type="button"
+                className="btn btn-outline-dark px-5 m-2"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+              >
+                Fetch a Single Students
+              </button>
             </div>
           )}
           <>
@@ -351,13 +359,6 @@ const Students = () => {
                     </div>
                     <div className="modal-footer">
                       <button
-                        className="btn btn-outline-dark"
-                        data-bs-target="#exampleModalToggle2"
-                        data-bs-toggle="modal"
-                      >
-                        To Fetch Single Student
-                      </button>
-                      <button
                         className="btn btn-dark"
                         type="submit"
                         data-bs-dismiss={formik.values.class !== "" && "modal"}
@@ -369,25 +370,25 @@ const Students = () => {
                 </div>
               </div>
             </form>
+
             <div
               className="modal fade"
-              id="exampleModalToggle2"
-              aria-hidden="true"
-              aria-labelledby="exampleModalToggleLabel2"
+              id="exampleModal"
               tabIndex={-1}
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
             >
               <div className="modal-dialog modal-dialog-centered">
                 <div className="modal-content">
                   <div className="modal-header">
-                    <h5 className="modal-title" id="exampleModalToggleLabel2">
-                      Fetch Single Student
+                    <h5 className="modal-title" id="exampleModalLabel">
+                      Fetch a Single Student
                     </h5>
                     <button
                       type="button"
                       className="btn-close"
                       data-bs-dismiss="modal"
                       aria-label="Close"
-                      onClick={() => setFetchStudentRollNo("")}
                     />
                   </div>
                   <div className="modal-body">
@@ -399,37 +400,20 @@ const Students = () => {
                       id="rollNo"
                       type="number"
                       min={21000}
-                      max={99999}
                       placeholder="Enter Student's Roll No."
                       value={fetchStudentRollNo}
                       onChange={(e) => setFetchStudentRollNo(e.target.value)}
                     />
                   </div>
                   <div className="modal-footer">
-                    <div className="row">
-                      <div className="col">
-                        <div className="text-left">
-                          <button
-                            className="btn btn-outline-dark"
-                            data-bs-target="#exampleModalToggle"
-                            data-bs-toggle="modal"
-                          >
-                            Back to Fetch Full Class
-                          </button>
-                          <button
-                            className="btn btn-dark ms-3"
-                            data-bs-dismiss={
-                              fetchStudentRollNo !== "" && "modal"
-                            }
-                            onClick={() =>
-                              fetchSingleStudent(fetchStudentRollNo)
-                            }
-                          >
-                            Fetch Student
-                          </button>
-                        </div>
-                      </div>
-                    </div>
+                    <button
+                      type="button"
+                      className="btn btn-dark ms-3"
+                      data-bs-dismiss={fetchStudentRollNo !== "" && "modal"}
+                      onClick={() => fetchSingleStudent(fetchStudentRollNo)}
+                    >
+                      Fetch Student Information
+                    </button>
                   </div>
                 </div>
               </div>
