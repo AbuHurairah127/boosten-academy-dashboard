@@ -7,6 +7,7 @@ const studentReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_STUDENT: {
       let newStudentList = action.payload;
+      newStudentList = newStudentList.sort((a, b) => a.rollNo - b.rollNo);
       return {
         ...state,
         studentsList: newStudentList,
