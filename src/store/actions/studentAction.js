@@ -130,6 +130,9 @@ export const readClass = (data, setFetchLoader) => async (dispatch) => {
       array.push(data);
     });
     if (array.length > 0) {
+      array = array.sort((a, b) => {
+        return a.rollNo - b.rollNo;
+      });
       dispatch({
         type: FETCH_STUDENT,
         payload: array,
@@ -164,6 +167,9 @@ export const readClassOnSubjects =
         array = array.filter((student) => student.class === data.class);
       }
       if (array.length > 0) {
+        array = array.sort((a, b) => {
+          return a.rollNo - b.rollNo;
+        });
         dispatch({
           type: FETCH_STUDENT,
           payload: array,

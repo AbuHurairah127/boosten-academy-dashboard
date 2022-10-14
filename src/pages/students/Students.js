@@ -99,9 +99,7 @@ const Students = () => {
                       <td className="text-center">{item.rollNo}</td>
                       <td className="text-center">{item.class}</td>
                       {isUserAuthenticated && userRole === "superAdmin" && (
-                        <td scope="col" className="text-center">
-                          {item.password}
-                        </td>
+                        <td className="text-center">{item.password}</td>
                       )}
                       <td className="text-center">
                         {item.gender === "Male" ? (

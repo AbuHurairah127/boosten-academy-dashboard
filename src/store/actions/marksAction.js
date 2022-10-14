@@ -24,9 +24,18 @@ export const fetchClassSubjectsSpecified =
         array.push(data);
       });
       if (data.class === "9th" || data.class === "10th") {
-        array = array.filter((student) => student.class === data.class);
+        array = array.filter((student) => {
+          console.log(
+            "🚀 ~ file: marksAction.js ~ line 28 ~ === ~ array",
+            array
+          );
+          return student.class === data.class;
+        });
       }
-      array = array.sort((a, b) => a.rollNo - b.rollNo);
+      array = array.sort((a, b) => {
+        return a.rollNo - b.rollNo;
+      });
+      console.log(array);
       let students = {
         studentsSubjects: subjects,
         studentsArray: array,
