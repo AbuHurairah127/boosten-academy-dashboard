@@ -17,6 +17,7 @@ const Students = () => {
     formik,
     onDeleteHandler,
     buttonLoader,
+    onUpdateHandler,
   } = useStudents();
   const isUserAuthenticated = useSelector(
     (store) => store.authReducer.isUserAuthenticated
@@ -124,6 +125,12 @@ const Students = () => {
                           ) : (
                             <AiFillDelete />
                           )}
+                        </button>
+                        <button
+                          className="btn btn-outline-primary"
+                          onClick={() => onUpdateHandler(item)}
+                        >
+                          <AiFillEdit />
                         </button>
                       </td>
                     </tr>

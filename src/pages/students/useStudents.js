@@ -8,6 +8,7 @@ import {
 } from "./../../store/actions/studentAction";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { UPDATE_STUDENT } from "../../store/types/constants";
 const useStudents = () => {
   const [fetchStudentRollNo, setFetchStudentRollNo] = useState("");
   const [fetchLoader, setFetchLoader] = useState(false);
@@ -51,6 +52,9 @@ const useStudents = () => {
   const onDeleteHandler = (studentID) => {
     dispatch(deleteStudent(studentID, setButtonLoader));
   };
+  const onUpdateHandler = (student) => {
+    dispatch({ type: UPDATE_STUDENT, payload: student });
+  };
   return {
     fetchStudentRollNo,
     setFetchStudentRollNo,
@@ -59,6 +63,7 @@ const useStudents = () => {
     onDeleteHandler,
     formik,
     buttonLoader,
+    onUpdateHandler,
   };
 };
 

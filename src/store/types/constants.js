@@ -10,7 +10,7 @@ export const UPDATE_ADMINS = "UPDATE_ADMINS";
 //  Students Constants
 export const CREATE_STUDENTS = "CREATE_STUDENTS";
 export const DELETE_STUDENTS = "DELETE_STUDENTS";
-export const UPDATE_STUDENTS = "UPDATE_STUDENTS";
+export const UPDATE_STUDENT = "UPDATE_STUDENT";
 export const FETCH_STUDENT = "FETCH_SINGLE_STUDENT";
 // Attendance Constants
 export const FETCH_ACADEMY = "FETCH_ACADEMY";

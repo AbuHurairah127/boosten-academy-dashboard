@@ -1,7 +1,13 @@
-import { DELETE_STUDENTS, FETCH_STUDENT } from "./../types/constants";
+import {
+  DELETE_STUDENTS,
+  FETCH_STUDENT,
+  UPDATE_STUDENT,
+} from "./../types/constants";
 
 let initialState = {
   studentsList: [],
+  updateStudent: {},
+  isUpdate: true,
 };
 const studentReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -10,6 +16,14 @@ const studentReducer = (state = initialState, action) => {
       return {
         ...state,
         studentsList: newStudentList,
+      };
+    }
+    case UPDATE_STUDENT: {
+      let studentToBeUpdated = action.payload;
+      return {
+        ...state,
+        isUpdate: true,
+        updateStudent: studentToBeUpdated,
       };
     }
     case DELETE_STUDENTS: {
