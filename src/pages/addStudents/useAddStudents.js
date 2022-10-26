@@ -1,16 +1,24 @@
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createStudent } from "../../store/actions/studentAction";
 const useAddStudents = () => {
+  const isUpdate = useSelector((store) => store.studentReducer.isUpdate);
+  const updateStudent = useSelector(
+    (store) => store.studentReducer.updateStudent
+  );
+  console.log(
+    "🚀 ~ file: useAddStudents.js ~ line 11 ~ useAddStudents ~ updateStudent",
+    updateStudent
+  );
   const [buttonLoader, setButtonLoader] = useState(false);
   const adminSignedIn = JSON.parse(localStorage.getItem("userCredentials"));
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
       name: "",
-      FName: "",
+      fName: "",
       rollNo: "",
       SNum: "",
       FNum: "",
@@ -27,7 +35,7 @@ const useAddStudents = () => {
         .max(25, "Too Long")
         .min(3, "Too Short")
         .required("Required"),
-      FName: yup
+      fName: yup
         .string()
         .max(25, "Too Long")
         .min(3, "Too Short")
@@ -51,7 +59,7 @@ const useAddStudents = () => {
     }),
     onSubmit: (values) => {
       values.name = values.name.trim();
-      values.FName = values.FName.trim();
+      values.fName = values.fName.trim();
       values.address = values.address.trim();
       values.city = values.city.trim();
       values.gender = values.gender.trim();
@@ -63,7 +71,7 @@ const useAddStudents = () => {
     },
   });
 
-  return { formik, buttonLoader };
+  return { formik, buttonLoader, isUpdate, updateStudent };
 };
 
 export default useAddStudents;

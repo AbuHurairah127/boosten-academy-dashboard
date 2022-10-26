@@ -4,7 +4,7 @@ import useAddStudents from "./useAddStudents";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import ButtonLoader from "./../../components/buttonLoader/ButtonLoader";
 const AddStudent = () => {
-  const { formik, buttonLoader } = useAddStudents();
+  const { formik, buttonLoader, isUpdate, updateStudent } = useAddStudents();
 
   return (
     <div className="container">
@@ -21,7 +21,11 @@ const AddStudent = () => {
                 <AiOutlineCloseCircle color="#000" size={30} />
               </Link>
             </div>
-            <h1 className="align-items-center">Add Students</h1>
+            <h1 className="align-items-center">
+              {!isUpdate
+                ? "Add Students"
+                : `Update Student (${updateStudent.name})`}
+            </h1>
           </div>
           <form
             className="row g-3"
@@ -39,7 +43,7 @@ const AddStudent = () => {
                 name="name"
                 placeholder="Name"
                 pattern="[a-zA-Z\s]+"
-                value={formik.values.name}
+                value={formik.values.name || updateStudent.name}
                 onChange={formik.handleChange}
                 required
                 title="Student's Name (Only Alphabet's are allowed)"
@@ -57,13 +61,13 @@ const AddStudent = () => {
               <input
                 type="text"
                 className="form-control"
-                id="inputFName"
-                name="FName"
+                name="fName"
                 placeholder="Father's Name"
                 pattern="[a-zA-Z\s]+"
+                value={
+                  isUpdate ? updateStudent.fatherName : formik.values.fName
+                }
                 onChange={formik.handleChange}
-                title="Father's Name"
-                required
               />
               {formik.errors.FName && (
                 <div className="text-center fw-bold text-danger">

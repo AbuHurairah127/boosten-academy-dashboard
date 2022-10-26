@@ -126,12 +126,14 @@ const Students = () => {
                             <AiFillDelete />
                           )}
                         </button>
-                        <button
-                          className="btn btn-outline-primary"
-                          onClick={() => onUpdateHandler(item)}
-                        >
-                          <AiFillEdit />
-                        </button>
+                        <Link to="/add-students">
+                          <button
+                            className="btn btn-outline-primary"
+                            onClick={() => onUpdateHandler(item)}
+                          >
+                            <AiFillEdit />
+                          </button>
+                        </Link>
                       </td>
                     </tr>
                   );
