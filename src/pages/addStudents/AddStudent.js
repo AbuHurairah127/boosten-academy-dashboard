@@ -472,7 +472,13 @@ const AddStudent = () => {
                 className="btn btn-outline-dark px-5 fw-bold"
                 disabled={buttonLoader}
               >
-                {buttonLoader ? <ButtonLoader size={13.5} /> : "Register"}
+                {buttonLoader ? (
+                  <ButtonLoader size={13.5} />
+                ) : isUpdate ? (
+                  "Update"
+                ) : (
+                  "Register"
+                )}
               </button>
             </div>
           </form>
