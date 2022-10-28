@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import "./students.css";
 import useStudents from "./useStudents";
 import ButtonLoader from "./../../components/buttonLoader/ButtonLoader";
-import { AiFillEdit, AiFillDelete, AiFillEye } from "react-icons/ai";
+import { AiFillEdit, AiFillDelete, AiOutlineWhatsApp } from "react-icons/ai";
 const Students = () => {
   const students = useSelector((store) => store.studentReducer.studentsList);
   const {
@@ -134,6 +134,9 @@ const Students = () => {
                             <AiFillEdit />
                           </button>
                         </Link>
+                        <button className="btn btn-outline-success mx-2">
+                          <AiOutlineWhatsApp />
+                        </button>
                       </td>
                     </tr>
                   );
