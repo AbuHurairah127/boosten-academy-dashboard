@@ -203,3 +203,4 @@ export const deleteStudent = (data, setButtonLoader) => async (dispatch) => {
     setTimeout(() => setButtonLoader(false), 500);
   }
 };
+export const updateStudent = (data,setButtonLoader) => async (dispatch) => {};

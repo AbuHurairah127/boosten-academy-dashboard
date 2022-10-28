@@ -67,7 +67,11 @@ const useAddStudents = () => {
       values.email = `${values.rollNo}@gulbergbostonacademy.web.app`;
       values.password = `0${values.rollNo}`;
       values.role = "student";
-      dispatch(createStudent(values, setButtonLoader, adminSignedIn));
+      if (isUpdate) {
+        dispatch(createStudent(values, setButtonLoader, adminSignedIn));
+      } else {
+        dispatch(createStudent(values, setButtonLoader, adminSignedIn));
+      }
     },
   });
 

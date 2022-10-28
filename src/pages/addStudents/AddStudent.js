@@ -87,6 +87,7 @@ const AddStudent = () => {
                 placeholder="Roll No."
                 pattern="[0-9]{5}"
                 value={isUpdate ? updateStudent.rollNo : formik.values.rollNo}
+                disabled={isUpdate}
                 onChange={formik.handleChange}
                 title="Roll No. Pattern: '22000'"
                 required

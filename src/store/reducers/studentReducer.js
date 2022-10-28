@@ -7,7 +7,7 @@ import {
 let initialState = {
   studentsList: [],
   updateStudent: {},
-  isUpdate: true,
+  isUpdate: false,
 };
 const studentReducer = (state = initialState, action) => {
   switch (action.type) {
