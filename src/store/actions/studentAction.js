@@ -211,10 +211,10 @@ export const studentUpdate = (data, setButtonLoader) => async (dispatch) => {
   await setDoc(doc(db, "students"));
 };
 export const whatsappMessage =
-  (uid, setWhatsappMsgLoader) => async (dispatch) => {
+  (uid, fatherNum, setWhatsappMsgLoader) => async (dispatch) => {
     try {
       setWhatsappMsgLoader(true);
-
+      console.log(fatherNum);
       const docRef = doc(db, "marks", uid);
       let docSnap = await getDoc(docRef);
       docSnap = docSnap.data();
@@ -222,10 +222,14 @@ export const whatsappMessage =
         window.notify("No result have been uploaded on the portal.", "info");
       } else {
         let marksArray = Object.values(docSnap);
+        console.log(
+          "🚀 ~ file: studentAction.js ~ line 225 ~ marksArray",
+          marksArray
+        );
         let subjectsArray = Object.keys(marksArray[0].obtainedMarks);
 
-        marksArray = marksArray.sort((a, b) => a.testNo - b.testNo);
-        marksArray.forEach((mark) => {
+        marksArray = marksArray.sort((a, b) => b.testNo - a.testNo);
+        marksArray.map((mark) => {
           let msgText = `Test No. ${
             mark.testNo
           }%0a ****************** %0a${subjectsArray.map(
@@ -238,7 +242,12 @@ export const whatsappMessage =
               "%0a"
           )}`;
           window.open(`https://wa.me/923021685883?text=${msgText}`);
+          console.log(msgText);
         });
       }
-    } catch (error) {}
+    } catch (error) {
+      window.notify(error.message, "error");
+    } finally {
+      setWhatsappMsgLoader(false);
+    }
   };

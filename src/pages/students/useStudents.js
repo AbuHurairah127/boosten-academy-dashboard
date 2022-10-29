@@ -57,8 +57,8 @@ const useStudents = () => {
   const onUpdateHandler = (student) => {
     dispatch({ type: UPDATE_STUDENT, payload: student });
   };
-  const sendWhatsappMessage = (uid) => {
-    dispatch(whatsappMessage(uid, setWhatsappMsgLoader));
+  const sendWhatsappMessage = (uid, fatherNum) => {
+    dispatch(whatsappMessage(uid, fatherNum, setWhatsappMsgLoader));
   };
   return {
     fetchStudentRollNo,

@@ -138,7 +138,9 @@ const Students = () => {
                         <button
                           className="btn btn-outline-success mx-2"
                           type="button"
-                          onClick={() => sendWhatsappMessage(item.uid)}
+                          onClick={() =>
+                            sendWhatsappMessage(item.uid, item.fatherNum)
+                          }
                         >
                           <AiOutlineWhatsApp />
                         </button>
