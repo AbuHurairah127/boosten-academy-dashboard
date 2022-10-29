@@ -11,10 +11,7 @@ const useAddStudents = () => {
   const updateStudent = useSelector(
     (store) => store.studentReducer.updateStudent
   );
-  console.log(
-    "🚀 ~ file: useAddStudents.js ~ line 14 ~ useAddStudents ~ updateStudent",
-    updateStudent
-  );
+
   const [buttonLoader, setButtonLoader] = useState(false);
   const adminSignedIn = JSON.parse(localStorage.getItem("userCredentials"));
   const dispatch = useDispatch();

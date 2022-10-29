@@ -21,7 +21,6 @@ import {
   FETCH_STUDENT,
   DELETE_STUDENTS,
 } from "../types/constants";
-import { idText } from "typescript";
 export const createStudent =
   (data, setButtonLoader, adminSignedIn) => async (dispatch) => {
     try {
@@ -223,13 +222,8 @@ export const studentUpdate =
         class: data.class,
         subjects: data.subjects,
       });
-      console.log("====================================");
-      console.log("updated");
-      console.log("====================================");
     } catch (error) {
-      console.log("====================================");
       console.log(error.message);
-      console.log("====================================");
     } finally {
       setButtonLoader(false);
     }
