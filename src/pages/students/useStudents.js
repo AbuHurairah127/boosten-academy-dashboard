@@ -5,6 +5,7 @@ import {
   readClass,
   readClassOnSubjects,
   deleteStudent,
+  whatsappMessage,
 } from "./../../store/actions/studentAction";
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -13,6 +14,7 @@ const useStudents = () => {
   const [fetchStudentRollNo, setFetchStudentRollNo] = useState("");
   const [fetchLoader, setFetchLoader] = useState(false);
   const [buttonLoader, setButtonLoader] = useState(false);
+  const [whatsappMsgLoader, setWhatsappMsgLoader] = useState(false);
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
@@ -55,6 +57,9 @@ const useStudents = () => {
   const onUpdateHandler = (student) => {
     dispatch({ type: UPDATE_STUDENT, payload: student });
   };
+  const sendWhatsappMessage = (uid) => {
+    dispatch(whatsappMessage(uid, setWhatsappMsgLoader));
+  };
   return {
     fetchStudentRollNo,
     setFetchStudentRollNo,
@@ -64,6 +69,7 @@ const useStudents = () => {
     formik,
     buttonLoader,
     onUpdateHandler,
+    sendWhatsappMessage,
   };
 };
 

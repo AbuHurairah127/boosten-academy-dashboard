@@ -9,6 +9,7 @@ import {
   doc,
   setDoc,
   getDocs,
+  getDoc,
   deleteDoc,
   where,
   query,
@@ -20,6 +21,7 @@ import {
   FETCH_STUDENT,
   DELETE_STUDENTS,
 } from "../types/constants";
+import { idText } from "typescript";
 export const createStudent =
   (data, setButtonLoader, adminSignedIn) => async (dispatch) => {
     try {
@@ -203,4 +205,40 @@ export const deleteStudent = (data, setButtonLoader) => async (dispatch) => {
     setTimeout(() => setButtonLoader(false), 500);
   }
 };
-export const updateStudent = (data,setButtonLoader) => async (dispatch) => {};
+export const studentUpdate = (data, setButtonLoader) => async (dispatch) => {
+  setButtonLoader(true);
+  console.log(data);
+  await setDoc(doc(db, "students"));
+};
+export const whatsappMessage =
+  (uid, setWhatsappMsgLoader) => async (dispatch) => {
+    try {
+      setWhatsappMsgLoader(true);
+
+      const docRef = doc(db, "marks", uid);
+      let docSnap = await getDoc(docRef);
+      docSnap = docSnap.data();
+      if (docSnap === undefined) {
+        window.notify("No result have been uploaded on the portal.", "info");
+      } else {
+        let marksArray = Object.values(docSnap);
+        let subjectsArray = Object.keys(marksArray[0].obtainedMarks);
+
+        marksArray = marksArray.sort((a, b) => a.testNo - b.testNo);
+        marksArray.forEach((mark) => {
+          let msgText = `Test No. ${
+            mark.testNo
+          }%0a **************** %0a${subjectsArray.map(
+            (item) =>
+              item +
+              ": " +
+              mark.obtainedMarks[item] +
+              "/" +
+              mark.totalMarks[item] +
+              "%0a"
+          )}`;
+          window.open(`https://wa.me/923021685883?text=${msgText}`);
+        });
+      }
+    } catch (error) {}
+  };

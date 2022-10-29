@@ -2,15 +2,14 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createStudent } from "../../store/actions/studentAction";
+import {
+  createStudent,
+  studentUpdate,
+} from "../../store/actions/studentAction";
 const useAddStudents = () => {
   const isUpdate = useSelector((store) => store.studentReducer.isUpdate);
   const updateStudent = useSelector(
     (store) => store.studentReducer.updateStudent
-  );
-  console.log(
-    "🚀 ~ file: useAddStudents.js ~ line 11 ~ useAddStudents ~ updateStudent",
-    updateStudent
   );
   const [buttonLoader, setButtonLoader] = useState(false);
   const adminSignedIn = JSON.parse(localStorage.getItem("userCredentials"));
@@ -57,7 +56,7 @@ const useAddStudents = () => {
       gender: yup.string().min(4).required("Required"),
       class: yup.string().min(3).required("Required"),
     }),
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       values.name = values.name.trim();
       values.fName = values.fName.trim();
       values.address = values.address.trim();
@@ -68,7 +67,7 @@ const useAddStudents = () => {
       values.password = `0${values.rollNo}`;
       values.role = "student";
       if (isUpdate) {
-        dispatch(createStudent(values, setButtonLoader, adminSignedIn));
+        dispatch(studentUpdate(values, setButtonLoader));
       } else {
         dispatch(createStudent(values, setButtonLoader, adminSignedIn));
       }

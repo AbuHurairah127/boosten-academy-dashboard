@@ -18,6 +18,7 @@ const Students = () => {
     onDeleteHandler,
     buttonLoader,
     onUpdateHandler,
+    sendWhatsappMessage,
   } = useStudents();
   const isUserAuthenticated = useSelector(
     (store) => store.authReducer.isUserAuthenticated
@@ -134,7 +135,11 @@ const Students = () => {
                             <AiFillEdit />
                           </button>
                         </Link>
-                        <button className="btn btn-outline-success mx-2">
+                        <button
+                          className="btn btn-outline-success mx-2"
+                          type="button"
+                          onClick={() => sendWhatsappMessage(item.uid)}
+                        >
                           <AiOutlineWhatsApp />
                         </button>
                       </td>
