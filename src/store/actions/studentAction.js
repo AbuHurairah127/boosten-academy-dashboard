@@ -214,7 +214,6 @@ export const whatsappMessage =
   (uid, fatherNum, setWhatsappMsgLoader) => async (dispatch) => {
     try {
       setWhatsappMsgLoader(true);
-      console.log(fatherNum);
       const docRef = doc(db, "marks", uid);
       let docSnap = await getDoc(docRef);
       docSnap = docSnap.data();
@@ -222,10 +221,7 @@ export const whatsappMessage =
         window.notify("No result have been uploaded on the portal.", "info");
       } else {
         let marksArray = Object.values(docSnap);
-        console.log(
-          "🚀 ~ file: studentAction.js ~ line 225 ~ marksArray",
-          marksArray
-        );
+
         let subjectsArray = Object.keys(marksArray[0].obtainedMarks);
 
         marksArray = marksArray.sort((a, b) => b.testNo - a.testNo);
@@ -241,8 +237,7 @@ export const whatsappMessage =
               mark.totalMarks[item] +
               "%0a"
           )}`;
-          window.open(`https://wa.me/923021685883?text=${msgText}`);
-          console.log(msgText);
+          window.open(`https://wa.me/${fatherNum}?text=${msgText}`);
         });
       }
     } catch (error) {
