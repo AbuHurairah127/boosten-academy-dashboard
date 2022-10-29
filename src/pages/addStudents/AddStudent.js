@@ -43,7 +43,7 @@ const AddStudent = () => {
                 name="name"
                 placeholder="Name"
                 pattern="[a-zA-Z\s]+"
-                value={isUpdate ? updateStudent.name : formik.values.name}
+                value={formik.values.name}
                 onChange={formik.handleChange}
                 required
                 title="Student's Name (Only Alphabet's are allowed)"
@@ -64,9 +64,7 @@ const AddStudent = () => {
                 name="fName"
                 placeholder="Father's Name"
                 pattern="[a-zA-Z\s]+"
-                value={
-                  isUpdate ? updateStudent.fatherName : formik.values.fName
-                }
+                value={formik.values.fName}
                 onChange={formik.handleChange}
               />
               {formik.errors.FName && (
@@ -86,7 +84,7 @@ const AddStudent = () => {
                 name="rollNo"
                 placeholder="Roll No."
                 pattern="[0-9]{5}"
-                value={isUpdate ? updateStudent.rollNo : formik.values.rollNo}
+                value={formik.values.rollNo}
                 disabled={isUpdate}
                 onChange={formik.handleChange}
                 title="Roll No. Pattern: '22000'"
@@ -107,7 +105,7 @@ const AddStudent = () => {
                 className="form-control"
                 id="inputDOB"
                 name="DOB"
-                value={isUpdate ? updateStudent.DOB : formik.values.DOB}
+                value={formik.values.DOB}
                 onChange={formik.handleChange}
                 title="Student's Date of Birth"
                 required
@@ -128,7 +126,7 @@ const AddStudent = () => {
                 id="inputSNum"
                 name="SNum"
                 placeholder="Student's Phone #"
-                value={isUpdate ? updateStudent.studentNum : formik.values.SNum}
+                value={formik.values.SNum}
                 onChange={formik.handleChange}
                 min="923000000000"
                 max="923500000000"
@@ -152,7 +150,7 @@ const AddStudent = () => {
                 id="inputFNum"
                 name="FNum"
                 placeholder="Father's Phone #"
-                value={isUpdate ? updateStudent.fatherNum : formik.values.FNum}
+                value={formik.values.FNum}
                 onChange={formik.handleChange}
                 min="923000000000"
                 max="923500000000"
@@ -176,7 +174,7 @@ const AddStudent = () => {
                 id="inputAddress"
                 placeholder="Present Address"
                 name="address"
-                value={isUpdate ? updateStudent.address : formik.values.address}
+                value={formik.values.address}
                 onChange={formik.handleChange}
                 title="Student's Address"
                 required
@@ -197,7 +195,7 @@ const AddStudent = () => {
                 id="inputCity"
                 name="city"
                 placeholder="City"
-                value={isUpdate ? updateStudent.city : formik.values.city}
+                value={formik.values.city}
                 onChange={formik.handleChange}
                 title="Students City"
                 required
@@ -221,26 +219,9 @@ const AddStudent = () => {
                 required
               >
                 <option value="">Choose Gender</option>
-                <option
-                  value="Male"
-                  selected={isUpdate && updateStudent.gender === "Male"}
-                >
-                  Male
-                </option>
-                <option
-                  value="Female"
-                  selected={isUpdate && updateStudent.gender === "Female"}
-                >
-                  Female
-                </option>
-                <option
-                  value="Prefer not to say"
-                  selected={
-                    isUpdate && updateStudent.gender === "Prefer not to say"
-                  }
-                >
-                  Prefer not to say
-                </option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Prefer not to say">Prefer not to say</option>
               </select>
               {formik.errors.gender && (
                 <div className="text-center fw-bold text-danger">
@@ -261,30 +242,10 @@ const AddStudent = () => {
                 required
               >
                 <option value="">Choose Class</option>
-                <option
-                  value="9th"
-                  selected={isUpdate && updateStudent.class === "9th"}
-                >
-                  9th
-                </option>
-                <option
-                  value="10th"
-                  selected={isUpdate && updateStudent.class === "10th"}
-                >
-                  10th
-                </option>
-                <option
-                  value="1st-year"
-                  selected={isUpdate && updateStudent.class === "1st-year"}
-                >
-                  11th
-                </option>
-                <option
-                  value="2nd-year"
-                  selected={isUpdate && updateStudent.class === "2nd-year"}
-                >
-                  12th
-                </option>
+                <option value="9th">9th</option>
+                <option value="10th">10th</option>
+                <option value="1st-year">11th</option>
+                <option value="2nd-year">12th</option>
               </select>{" "}
               {formik.errors.class && (
                 <div className="text-center fw-bold text-danger">

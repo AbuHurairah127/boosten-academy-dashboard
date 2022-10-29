@@ -210,39 +210,35 @@ export const studentUpdate = (data, setButtonLoader) => async (dispatch) => {
   console.log(data);
   await setDoc(doc(db, "students"));
 };
-export const whatsappMessage =
-  (uid, fatherNum, setWhatsappMsgLoader) => async (dispatch) => {
-    try {
-      setWhatsappMsgLoader(true);
-      const docRef = doc(db, "marks", uid);
-      let docSnap = await getDoc(docRef);
-      docSnap = docSnap.data();
-      if (docSnap === undefined) {
-        window.notify("No result have been uploaded on the portal.", "info");
-      } else {
-        let marksArray = Object.values(docSnap);
+export const whatsappMessage = (uid, fatherNum) => async (dispatch) => {
+  try {
+    const docRef = doc(db, "marks", uid);
+    let docSnap = await getDoc(docRef);
+    docSnap = docSnap.data();
+    if (docSnap === undefined) {
+      window.notify("No result have been uploaded on the portal.", "info");
+    } else {
+      let marksArray = Object.values(docSnap);
 
-        let subjectsArray = Object.keys(marksArray[0].obtainedMarks);
+      let subjectsArray = Object.keys(marksArray[0].obtainedMarks);
 
-        marksArray = marksArray.sort((a, b) => b.testNo - a.testNo);
-        marksArray.map((mark) => {
-          let msgText = `Test No. ${
-            mark.testNo
-          }%0a ****************** %0a${subjectsArray.map(
-            (item) =>
-              item +
-              ": " +
-              mark.obtainedMarks[item] +
-              "/" +
-              mark.totalMarks[item] +
-              "%0a"
-          )}`;
-          window.open(`https://wa.me/${fatherNum}?text=${msgText}`);
-        });
-      }
-    } catch (error) {
-      window.notify(error.message, "error");
-    } finally {
-      setWhatsappMsgLoader(false);
+      marksArray = marksArray.sort((a, b) => b.testNo - a.testNo);
+      marksArray.map((mark) => {
+        let msgText = `Test No. ${
+          mark.testNo
+        }%0a ****************** %0a${subjectsArray.map(
+          (item) =>
+            item +
+            ": " +
+            mark.obtainedMarks[item] +
+            "/" +
+            mark.totalMarks[item] +
+            "%0a"
+        )}`;
+        window.open(`https://wa.me/${fatherNum}?text=${msgText}`);
+      });
     }
-  };
+  } catch (error) {
+    window.notify(error.message, "error");
+  }
+};

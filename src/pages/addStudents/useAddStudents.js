@@ -11,11 +11,30 @@ const useAddStudents = () => {
   const updateStudent = useSelector(
     (store) => store.studentReducer.updateStudent
   );
+  console.log(
+    "🚀 ~ file: useAddStudents.js ~ line 14 ~ useAddStudents ~ updateStudent",
+    updateStudent
+  );
   const [buttonLoader, setButtonLoader] = useState(false);
   const adminSignedIn = JSON.parse(localStorage.getItem("userCredentials"));
   const dispatch = useDispatch();
-  const formik = useFormik({
-    initialValues: {
+  let initialValue;
+  if (isUpdate) {
+    initialValue = {
+      name: updateStudent.name,
+      fName: updateStudent.fatherName,
+      rollNo: updateStudent.rollNo,
+      SNum: updateStudent.studentNum,
+      FNum: updateStudent.fatherNum,
+      DOB: updateStudent.DOB,
+      address: updateStudent.address,
+      city: updateStudent.city,
+      gender: updateStudent.gender,
+      class: updateStudent.class,
+      subjects: updateStudent.subjects,
+    };
+  } else {
+    initialValue = {
       name: "",
       fName: "",
       rollNo: "",
@@ -27,7 +46,10 @@ const useAddStudents = () => {
       gender: "",
       class: "",
       subjects: "",
-    },
+    };
+  }
+  const formik = useFormik({
+    initialValues: initialValue,
     validationSchema: yup.object({
       name: yup
         .string()

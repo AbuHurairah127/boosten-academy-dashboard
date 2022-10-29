@@ -14,7 +14,6 @@ const useStudents = () => {
   const [fetchStudentRollNo, setFetchStudentRollNo] = useState("");
   const [fetchLoader, setFetchLoader] = useState(false);
   const [buttonLoader, setButtonLoader] = useState(false);
-  const [whatsappMsgLoader, setWhatsappMsgLoader] = useState(false);
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
@@ -58,7 +57,7 @@ const useStudents = () => {
     dispatch({ type: UPDATE_STUDENT, payload: student });
   };
   const sendWhatsappMessage = (uid, fatherNum) => {
-    dispatch(whatsappMessage(uid, fatherNum, setWhatsappMsgLoader));
+    dispatch(whatsappMessage(uid, fatherNum));
   };
   return {
     fetchStudentRollNo,
