@@ -228,7 +228,7 @@ export const whatsappMessage =
         marksArray.forEach((mark) => {
           let msgText = `Test No. ${
             mark.testNo
-          }%0a **************** %0a${subjectsArray.map(
+          }%0a ***************** %0a${subjectsArray.map(
             (item) =>
               item +
               ": " +
