@@ -89,7 +89,7 @@ const useAddStudents = () => {
       values.password = `0${values.rollNo}`;
       values.role = "student";
       if (isUpdate) {
-        dispatch(studentUpdate(values, setButtonLoader));
+        dispatch(studentUpdate(values, setButtonLoader, updateStudent.uid));
       } else {
         dispatch(createStudent(values, setButtonLoader, adminSignedIn));
       }

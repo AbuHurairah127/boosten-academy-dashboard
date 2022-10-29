@@ -40,7 +40,7 @@ export const createStudent =
           email: data.email,
           password: data.password,
           name: data.name,
-          fatherName: data.FName,
+          fatherName: data.fName,
           rollNo: data.rollNo,
           studentNum: data.SNum,
           fatherNum: data.FNum,
@@ -205,11 +205,35 @@ export const deleteStudent = (data, setButtonLoader) => async (dispatch) => {
     setTimeout(() => setButtonLoader(false), 500);
   }
 };
-export const studentUpdate = (data, setButtonLoader) => async (dispatch) => {
-  setButtonLoader(true);
-  console.log(data);
-  await setDoc(doc(db, "students"));
-};
+export const studentUpdate =
+  (data, setButtonLoader, uid) => async (dispatch) => {
+    try {
+      setButtonLoader(true);
+      console.log(data);
+      await setDoc(doc(db, "students", uid), {
+        name: data.name,
+        fatherName: data.fName,
+        rollNo: data.rollNo,
+        studentNum: data.SNum,
+        fatherNum: data.FNum,
+        DOB: data.DOB,
+        address: data.address,
+        city: data.city,
+        gender: data.gender,
+        class: data.class,
+        subjects: data.subjects,
+      });
+      console.log("====================================");
+      console.log("updated");
+      console.log("====================================");
+    } catch (error) {
+      console.log("====================================");
+      console.log(error.message);
+      console.log("====================================");
+    } finally {
+      setButtonLoader(false);
+    }
+  };
 export const whatsappMessage = (uid, fatherNum) => async (dispatch) => {
   try {
     const docRef = doc(db, "marks", uid);
