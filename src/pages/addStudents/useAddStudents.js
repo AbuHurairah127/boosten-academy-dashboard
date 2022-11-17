@@ -58,7 +58,7 @@ const useAddStudents = () => {
         .max(25, "Too Long")
         .min(3, "Too Short")
         .required("Required"),
-      rollNo: yup.number().min(22000, "Too Short").required("Required"),
+      rollNo: yup.number().required("Required"),
       SNum: yup
         .number()
         .min(923000000000, "Too Short")

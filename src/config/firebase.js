@@ -3,13 +3,13 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore/lite";
 const firebaseConfig = {
-  apiKey: "AIzaSyB9dzSFYgnuTx2GFM1br8CLF_QniKqhNB4",
-  authDomain: "boosten-academy.firebaseapp.com",
-  projectId: "boosten-academy",
-  storageBucket: "boosten-academy.appspot.com",
-  messagingSenderId: "846968168401",
-  appId: "1:846968168401:web:01d37e20cba8517a658af0",
-  measurementId: "G-FJQ884W3KT",
+  apiKey: "AIzaSyAaW4YWAIy15X7_gDQNPplnrCtjVVLJaps",
+  authDomain: "gulbergbostonacademy.firebaseapp.com",
+  projectId: "gulbergbostonacademy",
+  storageBucket: "gulbergbostonacademy.appspot.com",
+  messagingSenderId: "702618912183",
+  appId: "1:702618912183:web:6e23b86b4176061fd99432",
+  measurementId: "G-T7PQPLTR1P",
 };
 
 // Initialize Firebase

@@ -1,12 +1,12 @@
 {
   "projects": {
-    "default": "boosten-academy"
+    "default": "gulbergbostonacademy"
   },
   "targets": {
-    "boosten-academy": {
+    "gulbergbostonacademy": {
       "hosting": {
         "dashboard": [
-          "dashboard-boosten-academy"
+          "dashboard-gulbergbostonacademy"
         ]
       }
     }

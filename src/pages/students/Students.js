@@ -210,7 +210,7 @@ const Students = () => {
                           <option value="10th">10th</option>
                           <option value="1st-year">11th</option>
                           <option value="2nd-year">12th</option>
-                        </select>{" "}
+                        </select>
                         {formik.errors.class && (
                           <div className="text-center fw-bold text-danger">
                             {formik.errors.class}
